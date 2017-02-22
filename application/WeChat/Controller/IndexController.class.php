@@ -13,9 +13,9 @@ class IndexController extends HomebaseController{
     public function index($id = ''){
         //调试
         try{
-            $appid = 'wx58aebef2023e68cd'; //AppID(应用ID)
-            $token = 'E9E05045F594065909D2B5554A8F34CE'; //微信后台填写的TOKEN
-            $crypt = 'q6FPCUoCQWaOiR3UUe5RfQu8A7hlJcMW4BnNyH9z2il'; //消息加密KEY（EncodingAESKey）
+            $appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
+            $token = 'mynameisjason'; //微信后台填写的TOKEN
+            $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
             /* 加载微信SDK */
             $wechat = new Wechat($token, $appid, $crypt);
             
@@ -175,8 +175,8 @@ class IndexController extends HomebaseController{
      * @return string       媒体资源ID
      */
     private function upload($type){
-        $appid     = 'wx58aebef2023e68cd';
-        $appsecret = 'bf818ec2fb49c20a478bbefe9dc88c60';
+        $appid     = 'wxc3cc0ce351b3bf86';
+        $appsecret = '5c6913157773e47eb3d9cab72b103f3d';
 
         $token = session("token");
 
@@ -225,11 +225,11 @@ class IndexController extends HomebaseController{
     }
     
     public function createMenu() {
-    	$appid = 'wxaac1049c7dc3a4d0'; //AppID(应用ID)
+    	$appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
 //     	$token = 'mynameisjason'; //微信后台填写的TOKEN
 //     	$crypt = 'mCaFEbOH52kmqsiLqC1y1iyXxFbxTOObZ4IxKJgeQlZ'; //消息加密KEY（EncodingAESKey）
-    	$appsecret = '7f4e74404d81cf501f655976a6b5153e'; //appsecret
-    	$redirect_uri = "http://wechat.ddbookstore.applinzi.com/User/index";
+    	$appsecret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
+    	$redirect_uri = "http://59.110.158.255/index.php?g=WeChat&m=User&a=index";
     	
     	/* 加载微信高级接口SDK */
     	$token = session("token");
@@ -249,7 +249,7 @@ class IndexController extends HomebaseController{
     		array(
     			'type' => 'view',
     			'name' => '在线书店',
-    			'url'  => 'http://ddbookstore.applinzi.com',
+    			'url'  => 'http://59.110.158.255',
     		),
     		array(
     			'name' => '会员中心',
@@ -262,7 +262,7 @@ class IndexController extends HomebaseController{
     				array(
     					'type' => 'view',
     					'name' => '个人中心',
-    					'url'  => 'http://ddbookstore.applinzi.com/Member/index',
+    					'url'  => 'http://59.110.158.255/Member/index',
     				),
     			),
     		),
@@ -272,8 +272,8 @@ class IndexController extends HomebaseController{
     }
     
     public function myQRCode() {
-    	$appid = 'wxaac1049c7dc3a4d0'; //AppID(应用ID)
-    	$appsecret = '7f4e74404d81cf501f655976a6b5153e'; //appsecret
+    	$appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
+    	$appsecret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
     	
     	$token = session("token");
     	if($token){

@@ -14,12 +14,12 @@ class UserController extends HomebaseController{
 	}
 	
 	 public function index(){
-	 	$usersThird = M('MemberThird');
-	 	$userURL = 'http://ddbookstore.applinzi.com/Member/index';
-         $appid = 'wxaac1049c7dc3a4d0'; //AppID(应用ID)
+	 	 $usersThird = M('MemberThird');
+ 	  	 $userURL = 'http://59.110.158.255/Member/index';
+         $appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
          $token = 'mynameisjason'; //微信后台填写的TOKEN
-         $crypt = 'mCaFEbOH52kmqsiLqC1y1iyXxFbxTOObZ4IxKJgeQlZ'; //消息加密KEY（EncodingAESKey）
-         $secret = '7f4e74404d81cf501f655976a6b5153e'; //appsecret
+         $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
+         $secret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
          
          /* 加载微信高级接口SDK */
          $wechatAuth = new WechatAuth($appid, $secret, $token);
@@ -52,10 +52,10 @@ class UserController extends HomebaseController{
          			session('user',$data1);
          		
          			$data2 = array(
-         					'member_id'   => $rst1,
-         					'type'        => 1,
-         					'uuid'		  => $userInfo['unionid'],
-         					'create_time' => time(),
+         				'member_id'   => $rst1,
+         				'type'        => 1,
+         				'uuid'		  => $userInfo['unionid'],
+         				'create_time' => time(),
          			);
          			$rst2 = $usersThird->add($data2);
          			if ($rst2) {
