@@ -84,7 +84,7 @@ class IndexController extends HomebaseController{
             case Wechat::MSG_TYPE_EVENT:
                 switch ($data['Event']) {
                     case Wechat::MSG_EVENT_SUBSCRIBE:
-                        $wechat->replyText('欢迎您关注麦当苗儿公众平台！回复“文本”，“图片”，“语音”，“视频”，“音乐”，“图文”，“多图文”查看相应的信息！');
+                        $wechat->replyText('欢迎您关注叮当书舍公众平台  现在就点击“在线书店”开始购书之旅吧');
                         break;
                         
                     case Wechat::MSG_EVENT_LOCATION:
@@ -96,15 +96,17 @@ class IndexController extends HomebaseController{
                         break;
 
                     default:
-                        $wechat->replyText("欢迎访问麦当苗儿公众平台！您的事件类型：{$data['Event']}，EventKey：{$data['EventKey']}");
+                        $wechat->replyText("欢迎访问叮当书舍公众平台！您的事件类型：{$data['Event']}");
                         break;
                 }
                 break;
                 
-            case Wechat::MSG_TYPE_TEXT:
-                switch ($data['Content']) {
+            case Wechat::MSG_TYPE_TEXT: {
+            		$wechat->replyText("您输入的内容是：{$data['Content']}，稍后等待客服回复");
+            	} break;
+                /*switch ($data['Content']) {
                     case '文本':
-                        $wechat->replyText('欢迎访问麦当苗儿公众平台，这是文本回复的内容！');
+                        $wechat->replyText('欢迎访问叮当书舍公众平台，这是文本回复的内容！');
                         break;
 
                     case '图片':
@@ -158,14 +160,11 @@ class IndexController extends HomebaseController{
                         break;
                     
                     default:
-                        $wechat->replyText("欢迎访问麦当苗儿公众平台！您输入的内容是：{$data['Content']}");
+                        $wechat->replyText("您输入的内容是：{$data['Content']}，稍后等待客服回复");
                         break;
-                }
-                break;
+                }*/
             
-            default:
-                # code...
-                break;
+            default:break;
         }
     }
 
@@ -229,7 +228,7 @@ class IndexController extends HomebaseController{
 //     	$token = 'mynameisjason'; //微信后台填写的TOKEN
 //     	$crypt = 'mCaFEbOH52kmqsiLqC1y1iyXxFbxTOObZ4IxKJgeQlZ'; //消息加密KEY（EncodingAESKey）
     	$appsecret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
-    	$redirect_uri = "http://59.110.158.255/index.php?g=WeChat&m=User&a=index";
+    	$redirect_uri = leuu('User/index');
     	
     	/* 加载微信高级接口SDK */
     	$token = session("token");
@@ -249,7 +248,7 @@ class IndexController extends HomebaseController{
     		array(
     			'type' => 'view',
     			'name' => '在线书店',
-    			'url'  => 'http://59.110.158.255',
+    			'url'  => leuu('Book/Index/index'),
     		),
     		array(
     			'name' => '会员中心',
@@ -262,7 +261,7 @@ class IndexController extends HomebaseController{
     				array(
     					'type' => 'view',
     					'name' => '个人中心',
-    					'url'  => 'http://59.110.158.255/Member/index',
+    					'url'  => leuu('Book/Member/index'),
     				),
     			),
     		),

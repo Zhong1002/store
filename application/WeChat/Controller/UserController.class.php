@@ -15,7 +15,7 @@ class UserController extends HomebaseController{
 	
 	 public function index(){
 	 	 $usersThird = M('MemberThird');
- 	  	 $userURL = 'http://59.110.158.255/Member/index';
+ 	  	 $userURL = leuu('Book/Member/index');
          $appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
          $token = 'mynameisjason'; //微信后台填写的TOKEN
          $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
@@ -32,13 +32,13 @@ class UserController extends HomebaseController{
          	throw new \Exception($userInfo['errmsg']);
          }else {
          	//查询是否已经注册
-         	$isuser = $usersThird->where(array('uuid'=>$userInfo['unionid']))->getField('member_id');
+         	$isuser = $usersThird->where(array('uuid'=>$userInfo['openid']))->getField('member_id');
          	if(!empty($isuser)) {
          		$result = $this->users_model->where(array('member_id'=>$isuser))->find();
          		//已经注册的话直接登录，将member数据以session形式存放
          		$result['id'] = $result['member_id'];
          		session('user',$result);
-         		redirect($userURL);
+         		redirect($userURL,'1','正在为您登陆');
          	}else {
          		$data1 = array(
          				'nick_name'   => $userInfo['nickname'],
@@ -54,7 +54,7 @@ class UserController extends HomebaseController{
          			$data2 = array(
          				'member_id'   => $rst1,
          				'type'        => 1,
-         				'uuid'		  => $userInfo['unionid'],
+         				'uuid'		  => $userInfo['openid'],
          				'create_time' => time(),
          			);
          			$rst2 = $usersThird->add($data2);

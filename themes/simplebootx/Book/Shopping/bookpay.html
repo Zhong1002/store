@@ -24,7 +24,12 @@
                             <label>默认地址</label><input type='radio' checked>
                         </div>
                     </if>
-                    <input name="addr_id" type="hidden" value="{$defaultAddr['addr_id']}">
+                    <input name="contact" type="hidden" value="{$defaultAddr['contact']}">
+                    <input name="mobile" type="hidden" value="{$defaultAddr['mobile']}">
+                    <input name="province" type="hidden" value="{$defaultAddr['province']}">
+                    <input name="city" type="hidden" value="{$defaultAddr['city']}">
+                    <input name="district" type="hidden" value="{$defaultAddr['district']}">
+                    <input name="address" type="hidden" value="{$defaultAddr['address']}">
                 </li>
                 <else />
                     <div class='mui-text-center'><button class='mui-btn red' id='manageAddress' onclick='manageAddr()'>管理收货地址</button></div>
@@ -43,7 +48,8 @@
 	                		</p>
 	                		<input class="goods-id" name="goods_id[]" type="hidden" value="{$vo['goods_id']}">
 	                		<input name="num[]" type="hidden" value="{$vo['num']}">
-	                		<input name="price[]" type="hidden" value="{$vo['now_price']}">
+	                		<input name="pre_price[]" type="hidden" value="{$vo['pre_price']}">
+	                		<input name="now_price[]" type="hidden" value="{$vo['now_price']}">
 	                		<php>$booksPrice += ($vo['now_price'] * $vo['num']);</php>
 	                	</div>
 	                </li>

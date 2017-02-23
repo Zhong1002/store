@@ -18,10 +18,10 @@
     $('#weixin-menu ul li').each(function(i){
         $(this).click(function(){
             if($(this).attr("class")!="on"){
-                $('#weixin-menu ul .on span').animate({bottom:-$('#weixin-menu ul .on span').height()},200);
+                $('#weixin-menu ul .on span').animate({bottom:-$('#weixin-menu ul .on span').height()},500);
                 $('#weixin-menu ul .on').removeClass("on");
                 $(this).addClass("on");
-                $('#weixin-menu ul li span').eq(i).animate({bottom:40},200);
+                $('#weixin-menu ul li span').eq(i).animate({bottom:40},50);
                 $('.footer_front').show();
             }else{
                 $('#weixin-menu ul li span').eq(i).animate({bottom:-$('#weixin-menu ul li span').eq(i).height()},200);
@@ -31,6 +31,9 @@
         });
     });
     
+    /**
+     * 订单中心弹出菜单的点击
+     */
     $('.footer_front').click(function(){
         $('#weixin-menu ul .on span').animate({bottom:-$('#weixin-menu ul .on span').height()},200);
         $('#weixin-menu ul .on').removeClass("on");

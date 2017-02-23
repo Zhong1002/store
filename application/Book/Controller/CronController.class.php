@@ -33,9 +33,15 @@ class CronController extends HomebaseController {
 		$rst1 = $this->order_model->alias('a')->where($where)->setField(array('status'=>7,'end_time'=>$time));
 // 		$rst3 = $this->orderDetail_model->alias('a')->where($where)->setField(array('status'=>7));     	//为了减轻数据库压力的话或许不用更新order_detail中的status
 		if(!empty($order)) {
+			$sql = "UPDATE yz_goods SET inventory = CASE goods_id ";
+			$idArr = array();
 			foreach ($order as $vo) {
-				$rst2 = $this->goods_model->where(array('goods_id'=>$vo['goods_id']))->setInc('inventory',$vo['num']);
+				$sql .= sprintf("WHEN %d THEN inventory+%d ", $vo['goods_id'], $vo['num']);
+				array_push($idArr, $vo['goods_id']);
 			}
+			$ids = implode(',', $idArr);			//把字段内容变成"x,x,x"的形式
+			$sql .= "END WHERE goods_id IN ($ids)";
+			$rst2 = $this->goods_model->execute($sql);
 			if(($rst1 && $rst2)!==false) {
 				echo '更新成功';
 			}else {
@@ -63,9 +69,15 @@ class CronController extends HomebaseController {
 		$rst1 = $this->order_model->alias('a')->where($where)->setField(array('status'=>4));
 // 		$rst3 = $this->orderDetail_model->alias('a')->where($where)->setField(array('status'=>4));     	//为了减轻数据库压力的话或许不用更新order_detail中的status
 		if(!empty($order)) {
+			$sql = "UPDATE yz_goods SET sale_num = CASE goods_id ";
+			$idArr = array();
 			foreach ($order as $vo) {
-				$rst2 = $this->goods_model->where(array('goods_id'=>$vo['goods_id']))->setInc('sale_num',$vo['num']);
+				$sql .= sprintf("WHEN %d THEN sale_num+%d ", $vo['goods_id'], $vo['num']);
+				array_push($idArr, $vo['goods_id']);
 			}
+			$ids = implode(',', $idArr);			//把字段内容变成"x,x,x"的形式
+			$sql .= "END WHERE goods_id IN ($ids)";
+			$rst2 = $this->goods_model->execute($sql);
 			if(($rst1 && $rst2)!==false) {
 				echo '更新成功';
 			}else {

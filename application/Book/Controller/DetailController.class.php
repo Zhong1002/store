@@ -63,4 +63,31 @@ class DetailController extends HomebaseController{
 		$this->assign("params",json_decode($book['params'],true));
 	}
 	
+	/**
+	 * 后台点击查看订单详情
+	 */
+	public function adminDetail() {
+		$orderID = I("get.orderID",0,'intval');
+		$order_model = M('Order');
+		$address_model = M('OrderAddress');
+		$detail_model = M('OrderDetail');
+	
+		if(!empty($orderID)) {
+			$orderDetail = $order_model->where(array('order_id'=>$orderID))->find();
+			$orderAddr = $address_model->where(array('order_id'=>$orderID))->find();
+	
+			$orderGoods = $detail_model
+			->alias('a')
+			->field('a.goods_id,a.pre_price,a.now_price,num,name,cover')
+			->join(array('__GOODS__ USING(goods_id)'))
+			->where(array('order_id'=>$orderID))
+			->select();
+	
+			$this->assign("orderDetail",$orderDetail);
+			$this->assign("orderAddr",$orderAddr);
+			$this->assign("books",$orderGoods);
+		}
+		$this->display();
+	}
+	
 }

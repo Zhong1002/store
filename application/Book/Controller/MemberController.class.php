@@ -8,6 +8,7 @@ class MemberController extends HomebaseController{
 	protected $address_model;
 	protected $order_model;
 	protected $orderDetail_model;
+	protected $orderAddr_model;
 	protected $goods_model;
 	
 	private $allOrder;				//数据库中取出的订单
@@ -15,10 +16,12 @@ class MemberController extends HomebaseController{
 	
 	public function _initialize() {
 		parent::_initialize();
+		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
 		$this->users_model = M('Member');
 		$this->address_model = M('MemberAddress');
 		$this->order_model = M('Order');
 		$this->orderDetail_model = M('OrderDetail');
+		$this->orderAddr_model = M('OrderAddress');
 		$this->goods_model = M('Goods');
 	}
 	
@@ -43,7 +46,7 @@ class MemberController extends HomebaseController{
 			$this->assign('wait',$wait);
 			$this->display();
 		} else {
-			$this->redirect("StoreUser/Login/index");
+			$this->redirect("WeChat/User/index");
 		}
 	}
 	
@@ -56,7 +59,7 @@ class MemberController extends HomebaseController{
 			$this->assign('allOrder',$this->allOrder);
 			$this->display();
 		} else {
-			$this->redirect("StoreUser/Login/index");
+			$this->redirect("WeChat/User/index");
 		}
 	}
 	
@@ -141,7 +144,7 @@ class MemberController extends HomebaseController{
 		
 			$orderBook = $this->orderDetail_model
 			->alias('a')
-			->field('a.goods_id,num,name,pre_price,now_price,cover')
+			->field('a.goods_id,a.pre_price,a.now_price,num,name,cover')
 			->join(array('__GOODS__ USING(goods_id)'))
 			->where(array('order_id'=>$vo['order_id']))
 			->select();
@@ -189,13 +192,13 @@ class MemberController extends HomebaseController{
 			->field('a.goods_id,name,pre_price,now_price,cover')
 			->join(array('__GOODS__ USING(goods_id)'))
 			->where(array('member_id'=>$user_id))
-			->order(array('a.create_time'=>'desc'))
+			->order(array('id'=>'desc'))
 			->page(1,10)->select();
 			
 			$this->assign('books',$myFavorite);
 			$this->display();
 		} else {
-			$this->redirect("StoreUser/Login/index");
+			$this->redirect("WeChat/User/index");
 		}
 	}
 	
@@ -211,7 +214,7 @@ class MemberController extends HomebaseController{
 			
 			$this->display();
 		} else {
-			$this->redirect("StoreUser/Login/index");
+			$this->redirect("WeChat/User/index");
 		}
 	}
 	
@@ -484,7 +487,7 @@ class MemberController extends HomebaseController{
 		->field('a.goods_id,name,pre_price,now_price,cover')
 		->join(array('__GOODS__ USING(goods_id)'))
 		->where(array('member_id'=>$user_id))
-		->order(array('a.create_time'=>'desc'))
+		->order(array('id'=>'desc'))
 		->page($page_num,10)->select();
 		
 		$res['result']=$myFavorite;

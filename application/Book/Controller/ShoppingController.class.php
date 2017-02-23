@@ -7,13 +7,16 @@ class ShoppingController extends HomebaseController{
 	protected $cart_model;
 	protected $order_model; 
 	protected $orderDetail_model;
+	protected $orderAddr_model;
 	
 	public function _initialize() {
 		parent::_initialize();
+		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
 		$this->goods_model = M('Goods');
 		$this->cart_model = M('MemberCart');
 		$this->order_model = M('Order');
 		$this->orderDetail_model = M('OrderDetail');
+		$this->orderAddr_model = M('OrderAddress');
 	}
 	
 	public function index() {
@@ -29,15 +32,15 @@ class ShoppingController extends HomebaseController{
 
 			$Model = D("MemberCartView");
 			$books = $Model
-			->field('goods_id,member_id,num,name,pre_price,now_price,inventory,cover,create_time')
+			->field('goods_id,member_id,num,name,pre_price,now_price,inventory,cover')
 			->where(array('member_id'=>$user_id))
-			->order('create_time desc')
+			->order('goods_id DESC')
 			->select();
 			
 			$this->assign('books', $books);
 			$this->display();
 		} else {
-			$this->redirect("StoreUser/Login/index");
+			$this->redirect("WeChat/User/index");
 		}
 	}
 	
@@ -252,7 +255,7 @@ class ShoppingController extends HomebaseController{
 						->field('goods_id,name,cover,now_price,pre_price,num')
 						->join(array('__MEMBER_CART__ b USING(goods_id)'))
 						->where(array('b.member_id'=>$user_id,'goods_id'=>array('in',$products)))
-						->order('b.create_time desc')->select();			//查询顺序要和购物车查询时的顺序一致
+						->order('a.goods_id DESC')->select();			//查询顺序要和购物车查询时的顺序一致
 						
 			//在订单中更换地址
 			if(!empty($addrID)) {
@@ -282,6 +285,7 @@ class ShoppingController extends HomebaseController{
 		if($data === false) $this->error($this->order_model->getError(),'',1);
 		
 		$details_data = $this->orderDetail_model->create();
+		$address_data = $this->orderAddr_model->create();
 		
 		//order参数
 // 		$order_sn = $user_id.time().rand(10,99);					//商品条码
@@ -301,6 +305,10 @@ class ShoppingController extends HomebaseController{
 		$orderRst = $this->order_model->add($data);					//创建order，创建成功返回当前主键值
 		
 		if($orderRst) {
+			$address_data['order_id'] = $orderRst;
+			$address_data['create_time'] = $create_time;
+			$addressRst = $this->orderAddr_model->add($address_data);	//把地址等信息加入订单地址表
+			
 			//批量减少字段
 			$ids = implode(',', $details_data['goods_id']);			//把字段内容变成"x,x,x"的形式
 			$sql = "UPDATE yz_goods SET inventory = CASE goods_id ";
@@ -311,7 +319,8 @@ class ShoppingController extends HomebaseController{
 					'order_id' => $orderRst,
 					'goods_id' => $details_data['goods_id'][$i],
 					'num' => $details_data['num'][$i],
-					'price' => $details_data['price'][$i],
+					'pre_price' => $details_data['pre_price'][$i],
+					'now_price' => $details_data['now_price'][$i],
 					'create_time' => $create_time
 				);
 			}
@@ -319,7 +328,7 @@ class ShoppingController extends HomebaseController{
 			
 			$goodsRst = $this->goods_model->execute($sql);					//批量减少库存
 			$detailRst = $this->orderDetail_model->addAll($dataList);		//批量添加数据
-			if(($goodsRst && $detailRst) === false) $this->error('操作出错',leuu('Member/order'),1);
+			if(($goodsRst && $detailRst && $addressRst) === false) $this->error('操作出错',leuu('Member/order'),1);
 			
 			redirect(leuu('Shopping/orderDetail', array('orderID' => $orderRst)));
 		}else {
@@ -390,11 +399,11 @@ class ShoppingController extends HomebaseController{
 		
 		if(!empty($orderID)) {
 			$orderDetail = $this->order_model->where(array('order_id'=>$orderID,'member_id'=>$user_id))->find();
-			$orderAddr = $address_model->where(array('addr_id'=>$orderDetail['addr_id']))->find();
+			$orderAddr = $this->orderAddr_model->where(array('order_id'=>$orderID))->find();
 			
 			$orderGoods = $this->orderDetail_model
 			->alias('a')
-			->field('a.goods_id,num,name,pre_price,now_price,cover')
+			->field('a.goods_id,a.pre_price,a.now_price,num,name,cover')
 			->join(array('__GOODS__ USING(goods_id)'))
 			->where(array('order_id'=>$orderID))
 			->select();
@@ -585,32 +594,6 @@ class ShoppingController extends HomebaseController{
 		}else {
 			$this->error('已评价',leuu('Member/waitcomment'),1);
 		}
-	}
-	
-	/**
-	 * 后台点击查看订单详情
-	 */
-	public function adminDetail() {
-		$orderID = I("get.orderID",0,'intval');
-		// 		$user_id = sp_get_current_userid();
-		$address_model = M('MemberAddress');
-	
-		if(!empty($orderID)) {
-			$orderDetail = $this->order_model->where(array('order_id'=>$orderID))->find();
-			$orderAddr = $address_model->where(array('addr_id'=>$orderDetail['addr_id']))->find();
-	
-			$orderGoods = $this->orderDetail_model
-			->alias('a')
-			->field('a.goods_id,num,name,pre_price,now_price,cover')
-			->join(array('__GOODS__ USING(goods_id)'))
-			->where(array('order_id'=>$orderID))
-			->select();
-	
-			$this->assign("orderDetail",$orderDetail);
-			$this->assign("orderAddr",$orderAddr);
-			$this->assign("books",$orderGoods);
-		}
-		$this->display();
 	}
 	
 	/*public function testOrder() {
