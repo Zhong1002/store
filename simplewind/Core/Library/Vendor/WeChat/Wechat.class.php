@@ -9,9 +9,6 @@
 // | Author: 麦当苗儿 <zuojiazi.cn@gmail.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Com;
-use Com\WechatCrypt;
-
 //支持在非ThinkPHP环境下使用
 defined('NOW_TIME') || define('NOW_TIME', $_SERVER['REQUEST_TIME']);
 defined('IS_GET')   || define('IS_GET',   $_SERVER['REQUEST_METHOD'] == 'GET');

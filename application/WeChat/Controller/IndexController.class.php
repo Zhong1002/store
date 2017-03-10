@@ -1,8 +1,9 @@
 <?php
 namespace WeChat\Controller;
 use Common\Controller\HomebaseController;
-use Com\Wechat;
-use Com\WechatAuth;
+
+vendor('WeChat.Wechat#class');
+vendor('WeChat.WechatAuth#class');
 
 class IndexController extends HomebaseController{
 	 /**
@@ -17,7 +18,7 @@ class IndexController extends HomebaseController{
             $token = 'mynameisjason'; //微信后台填写的TOKEN
             $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
             /* 加载微信SDK */
-            $wechat = new Wechat($token, $appid, $crypt);
+            $wechat = new \Wechat($token, $appid, $crypt);
             
             /* 获取请求信息 */
             $data = $wechat->request();
@@ -81,17 +82,17 @@ class IndexController extends HomebaseController{
      */
     private function demo($wechat, $data){
         switch ($data['MsgType']) {
-            case Wechat::MSG_TYPE_EVENT:
+            case \Wechat::MSG_TYPE_EVENT:
                 switch ($data['Event']) {
-                    case Wechat::MSG_EVENT_SUBSCRIBE:
+                    case \Wechat::MSG_EVENT_SUBSCRIBE:
                         $wechat->replyText('欢迎您关注叮当书舍公众平台  现在就点击“在线书店”开始购书之旅吧');
                         break;
                         
-                    case Wechat::MSG_EVENT_LOCATION:
+                    case \Wechat::MSG_EVENT_LOCATION:
                         $wechat->replyText("您的事件类型：{$data['Event']},经纬度：{$data['Latitude']}-{$data['Longitude']}");
                         break;
                     
-                    case Wechat::MSG_EVENT_UNSUBSCRIBE:
+                    case \Wechat::MSG_EVENT_UNSUBSCRIBE:
                         //取消关注，记录日志
                         break;
 
@@ -101,7 +102,7 @@ class IndexController extends HomebaseController{
                 }
                 break;
                 
-            case Wechat::MSG_TYPE_TEXT: {
+            case \Wechat::MSG_TYPE_TEXT: {
             		$wechat->replyText("您输入的内容是：{$data['Content']}，稍后等待客服回复");
             	} break;
                 /*switch ($data['Content']) {
@@ -180,9 +181,9 @@ class IndexController extends HomebaseController{
         $token = session("token");
 
         if($token){
-            $auth = new WechatAuth($appid, $appsecret, $token);
+            $auth = new \WechatAuth($appid, $appsecret, $token);
         } else {
-            $auth  = new WechatAuth($appid, $appsecret);
+            $auth  = new \WechatAuth($appid, $appsecret);
             $token = $auth->getAccessToken();
 
             session(array('expire' => $token['expires_in']));
@@ -234,9 +235,9 @@ class IndexController extends HomebaseController{
     	$token = session("token");
 
         if($token){
-            $wechatAuth = new WechatAuth($appid, $appsecret, $token);
+            $wechatAuth = new \WechatAuth($appid, $appsecret, $token);
         } else {
-            $wechatAuth  = new WechatAuth($appid, $appsecret);
+            $wechatAuth  = new \WechatAuth($appid, $appsecret);
             $token = $wechatAuth->getAccessToken();
 
             session(array('expire' => $token['expires_in']));
@@ -276,9 +277,9 @@ class IndexController extends HomebaseController{
     	
     	$token = session("token");
     	if($token){
-    		$wechatAuth = new WechatAuth($appid, $appsecret, $token);
+    		$wechatAuth = new \WechatAuth($appid, $appsecret, $token);
     	} else {
-    		$wechatAuth  = new WechatAuth($appid, $appsecret);
+    		$wechatAuth  = new \WechatAuth($appid, $appsecret);
     		$token = $wechatAuth->getAccessToken();
     	
     		session(array('expire' => $token['expires_in']));

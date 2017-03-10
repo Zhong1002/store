@@ -128,12 +128,12 @@
     $('#submitOrder').click(function() {
 	    var addr_id = "{$defaultAddr['addr_id']}";
         if((addr_id != "") && (typeof($('.goods-id').val()) != 'undefined')){		//判断是否有地址和商品信息
-            var result = confirm("确认付款？");
+            /*var result = confirm("确认付款？");
             if(result) {
                 $("input[name=status]").val(2);
             }else {
                 $("input[name=status]").val(1);
-            }
+            }*/
             form_confirm = true;
         }else {
             mui.toast("请先完善地址等信息");

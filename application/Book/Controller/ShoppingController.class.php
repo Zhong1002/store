@@ -308,6 +308,7 @@ class ShoppingController extends HomebaseController{
 			$address_data['order_id'] = $orderRst;
 			$address_data['create_time'] = $create_time;
 			$addressRst = $this->orderAddr_model->add($address_data);	//把地址等信息加入订单地址表
+			if($addressRst === false) $this->error('操作出错',leuu('Member/order'),1);
 			
 			//批量减少字段
 			$ids = implode(',', $details_data['goods_id']);			//把字段内容变成"x,x,x"的形式
@@ -327,66 +328,17 @@ class ShoppingController extends HomebaseController{
 			$sql .= "END WHERE goods_id IN ($ids)";
 			
 			$goodsRst = $this->goods_model->execute($sql);					//批量减少库存
+			if($goodsRst === false) $this->error('操作出错',leuu('Member/order'),1);
 			$detailRst = $this->orderDetail_model->addAll($dataList);		//批量添加数据
-			if(($goodsRst && $detailRst && $addressRst) === false) $this->error('操作出错',leuu('Member/order'),1);
+			if($detailRst === false) $this->error('操作出错',leuu('Member/order'),1);
 			
-			redirect(leuu('Shopping/orderDetail', array('orderID' => $orderRst)));
+			// 前往支付
+			redirect(leuu('WeChat/Weixinpay/pay',array('out_trade_no'=>$orderRst)));
+			
+// 			redirect(leuu('Shopping/orderDetail', array('orderID' => $orderRst)));
 		}else {
 			$this->order_model->getError();
 		}
-		
-		/*$products = I("post.products");
-		$productsPrice = I("post.productsPrice");
-		$addrID = I("post.addrID");
-		$payStatus = I("post.myStatus");
-		$remark = I("post.myRemark");
-		$payChannel = I("post.myChannel");
-		
-		$user_id = sp_get_current_userid();
-		
-		if (!empty($addrID)) {
-// 			$order_model->create();
-			$order_sn = $user_id.time().rand(10,99);
-			$orderData = array(
-				'order_sn'=>$order_sn,
-				'member_id'=>$user_id,
-				'addr_id'=>$addrID,
-				'total_price'=>$productsPrice,
-				'status'=>$payStatus,
-				'remark'=>$remark,
-				'pay_channel'=>$payChannel,
-				'create_time'=>time(),
-			);
-			$orderRst = $this->order_model->add($orderData);
-			if($orderRst) {
-				$order_id = $this->order_model->where(array('order_sn'=>$order_sn))->getField('order_id');
-				foreach ($products as $id) {
-					$books = explode("-",$id);
-					$data = array(
-						'order_id'=>$order_id,
-						'goods_id'=>$books[0],
-						'num'=>$books[1],
-						'price'=>$books[2],
-// 						'status'=>$payStatus,
-						'create_time'=>time(),
-					);
-					$rsts = $this->orderDetail_model->add($data);
-					$cartRst = $this->cart_model->where(array('goods_id'=>$books[0],'member_id'=>$user_id))->delete();
-					$goodsRst = $this->goods_model->where(array('goods_id'=>$books[0]))->setDec('inventory');
-					if($rsts && $goodsRst && $cartRst) {
-						$result['result'] = 1;
-					}else {
-						$result['result'] = -1;
-					}
-				}
-			}else {
-				$result['result'] = -1;
-			}
-		}else {
-			$result['result'] = -1;
-		}
-		$result['order_id'] = $order_id;
-		$this->ajaxReturn($result,'json');*/
 	}
 	
 	/**
