@@ -38,7 +38,7 @@ class UserController extends HomebaseController{
          		//已经注册的话直接登录，将member数据以session形式存放
          		$result['id'] = $result['member_id'];
          		session('user',$result);
-         		redirect($userURL,'1','正在为您登陆');
+         		redirect($userURL,'1','正在为您登陆...');
          	}else {
          		$data1 = array(
          				'nick_name'   => $userInfo['nickname'],
@@ -59,7 +59,7 @@ class UserController extends HomebaseController{
          			);
          			$rst2 = $usersThird->add($data2);
          			if ($rst2) {
-         				$this->success("注册成功！",$userURL);
+         				$this->success("仅仅获取了您的头像和昵称，不用担心",$userURL);
          			}else {
          				$this->error('注册出错');
          			}
