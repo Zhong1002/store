@@ -183,9 +183,9 @@ class Weixinpay {
             $openid=$result['openid'];
             // 订单数据  请根据订单号out_trade_no 从数据库中查出实际的body、total_fee、out_trade_no、product_id
             $order=array(
-                'body'=>'叮当书店图书支付-'.$out_trade_no,// 商品描述（需要根据自己的业务修改）
+                'body'=>'叮当书店图书支付',// 商品描述（需要根据自己的业务修改）
                 'total_fee'=>$order_detail['total_price']*100,// 订单金额  以(分)为单位（需要根据自己的业务修改）
-                'out_trade_no'=>$order_detail['order_sn'],// 订单号（需要根据自己的业务修改）
+                'out_trade_no'=>$out_trade_no,// 订单号（需要根据自己的业务修改）
                 'product_id'=>$out_trade_no,// 商品id（需要根据自己的业务修改）
                 'trade_type'=>'JSAPI',// JSAPI公众号支付
                 'openid'=>$openid// 获取到的openid

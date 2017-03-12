@@ -152,6 +152,13 @@ nav.menu-bar a.fr{float: right;font-size: 0.8rem;}
     margin-left: -28px;
     z-index: 200000000;
 }
+
+.webpay-notify {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+}
+
 .spin-body {
     position: absolute;
     top: 0;  

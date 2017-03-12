@@ -10,15 +10,15 @@ class WeixinpayController extends HomebaseController{
      * notify_url接收页面
      */
     public function notify(){
+    	$order_model = M('Order');
         // 导入微信支付sdk
         vendor('WxPay.Weixinpay');
         $wxpay=new \Weixinpay();
         $result=$wxpay->notify();
         if ($result) {
             // 验证成功 修改数据库的订单状态等 $result['out_trade_no']为订单号
-            echo '验证成功';
+            $order_rst = $order_model->where(array('order_id'=>$result['out_trade_no']))->setField(array('status'=>2));
         }
-        dump($result);
     }
 
     /**

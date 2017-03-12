@@ -1,30 +1,49 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title></head><body style="text-align: center;"> <button onclick="getOrder()">购买</button><jquery/><script>
+<tc_include file="Public:bookhead" />
+</head>
+<body class="bgw">
+<header class="mui-text-center">
+   <h2>支付页面</h2>
+</header>
+<div class="mui-content bgw">
+	<div class="webpay-notify">
+	</div>
+</div>
 
-function onBridgeReady(){
-    var data={$data};
-    WeixinJSBridge.invoke(
-        'getBrandWCPayRequest', data, 
-        function(res){
-        	WeixinJSBridge.log(res.err_msg);
-            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-            	alert(res.err_code+res.err_desc+res.err_msg);
-            }else{
-                alert(res.err_code+res.err_desc+res.err_msg); // 显示错误信息
-            }
-        }
-    );
-}
-
- if (typeof WeixinJSBridge == "undefined"){
-     if( document.addEventListener ){
-         document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-     }else if (document.attachEvent){
-         document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-         document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-     }
- }else{
-      onBridgeReady();
- }
-
-</script></body></html>
+<tc_include file="Public:bookfooter" />
+<tc_include file="Public:bookscripts" />
+<script>
+	function onBridgeReady(){
+	    var data={$data};
+	    WeixinJSBridge.invoke(
+	        'getBrandWCPayRequest', data, 
+	        function(res){
+	        	var htmlstr = '';
+	        	WeixinJSBridge.log(res.err_msg);
+	            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+	                // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+	                htmlstr += '<img src="{:sp_get_asset_upload_path('img/paysuccess.png')}">'+
+	                			'<h4>支付成功</h4>';
+	            	$('.webpay-notify').append(htmlstr);
+	            }else{
+	            	htmlstr += '<img src="{:sp_get_asset_upload_path('img/payfail.png')}">'+
+							   '<h4>支付失败</h4>'
+	                $('.webpay-notify').append(htmlstr);
+	            }
+	            
+	        }
+	    );
+	}
+	
+	 if (typeof WeixinJSBridge == "undefined"){
+	     if( document.addEventListener ){
+	         document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+	     }else if (document.attachEvent){
+	         document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+	         document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+	     }
+	 }else{
+	      onBridgeReady();
+	 }
+</script>
+</body>
+</html>
