@@ -333,7 +333,7 @@ class ShoppingController extends HomebaseController{
 			if($detailRst === false) $this->error('操作出错',leuu('Member/order'),1);
 			
 			// 前往支付
-			redirect(leuu('WeChat/Weixinpay/pay',array('out_trade_no'=>$orderRst)));
+			redirect(leuu('WeChat/Wxpaytest/pay',array('out_trade_no'=>$orderRst)));
 			
 // 			redirect(leuu('Shopping/orderDetail', array('orderID' => $orderRst)));
 		}else {
