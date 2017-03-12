@@ -11,7 +11,7 @@ class ShoppingController extends HomebaseController{
 	
 	public function _initialize() {
 		parent::_initialize();
-// 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
+		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
 		$this->goods_model = M('Goods');
 		$this->cart_model = M('MemberCart');
 		$this->order_model = M('Order');

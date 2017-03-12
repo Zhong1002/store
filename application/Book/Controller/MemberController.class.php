@@ -16,7 +16,7 @@ class MemberController extends HomebaseController{
 	
 	public function _initialize() {
 		parent::_initialize();
-// 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
+		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
 		$this->users_model = M('Member');
 		$this->address_model = M('MemberAddress');
 		$this->order_model = M('Order');
