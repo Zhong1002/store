@@ -18,6 +18,7 @@ class WeixinpayController extends HomebaseController{
         if ($result) {
             // 验证成功 修改数据库的订单状态等 $result['out_trade_no']为订单号
             $order_rst = $order_model->where(array('order_id'=>$result['out_trade_no']))->setField(array('status'=>2));
+            if($order_rst === false) $this->error($order_model->getError());
         }
     }
 
@@ -27,16 +28,16 @@ class WeixinpayController extends HomebaseController{
      * 中的weixinpay_js方法
      */
     public function pay(){
-        // 导入微信支付sdk
-        vendor('WxPay.Weixinpay');
-        $wxpay=new \Weixinpay();
-        // 获取jssdk需要用到的数据
-        $data=$wxpay->getParameters();
-        // 将数据分配到前台页面
-        $assign=array(
-            'data'=>json_encode($data)
-        );
-        $this->assign($assign);
+//         // 导入微信支付sdk
+//         vendor('WxPay.Weixinpay');
+//         $wxpay=new \Weixinpay();
+//         // 获取jssdk需要用到的数据
+//         $data=$wxpay->getParameters();
+//         // 将数据分配到前台页面
+//         $assign=array(
+//             'data'=>json_encode($data)
+//         );
+//         $this->assign($assign);
         $this->display();
     }
 
