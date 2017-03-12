@@ -40,8 +40,7 @@ class ShoppingController extends HomebaseController{
 			$this->assign('books', $books);
 			$this->display();
 		} else {
-			dump(R('Util/Wxnormal/getRequestCodeURL'));
-// 			$this->redirect(R('Util/Wxnormal/getRequestCodeURL'));
+			redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		}
 	}
 	

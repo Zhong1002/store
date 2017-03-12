@@ -46,7 +46,7 @@ class MemberController extends HomebaseController{
 			$this->assign('wait',$wait);
 			$this->display();
 		} else {
-			$this->redirect(R('Util/Wxnormal/getRequestCodeURL'));
+			redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		}
 	}
 	
@@ -59,7 +59,7 @@ class MemberController extends HomebaseController{
 			$this->assign('allOrder',$this->allOrder);
 			$this->display();
 		} else {
-			$this->redirect(R('Util/Wxnormal/getRequestCodeURL'));
+			redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		}
 	}
 	
@@ -198,7 +198,7 @@ class MemberController extends HomebaseController{
 			$this->assign('books',$myFavorite);
 			$this->display();
 		} else {
-			$this->redirect(R('Util/Wxnormal/getRequestCodeURL'));
+			redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		}
 	}
 	
@@ -214,7 +214,7 @@ class MemberController extends HomebaseController{
 			
 			$this->display();
 		} else {
-			$this->redirect(R('Util/Wxnormal/getRequestCodeURL'));
+			redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		}
 	}
 	
