@@ -13,16 +13,16 @@
 			<li class="mui-table-view-cell"><img class="mui-media-object mui-pull-left" src="{:sp_get_asset_upload_path($book['cover'])}">
 
 				<div class="mui-media-body">
-					{$book['name']}
-					<p class="price">
+					<h4>{$book['name']}</h4>
 					<div class="fl">评分：</div><div class="star fl" data-score="{$score}"></div> <br />
-					价格：<span class="red">￥{$book['now_price']}</span>
+					<p class="price">
+					<span>价格：</span><span class="red">￥{$book['now_price']}</span>
 						<span class="delete">￥{$book['pre_price']}</span>&nbsp;&nbsp;[<span>
 						<php>$discount=round(($book['now_price']/$book['pre_price']*10),1);echo $discount;</php>
 						</span>折]<br />
 					</p>
 					<p>
-						库存：<span>{$book['inventory']}</span>件
+						<span>库存：</span><span>{$book['inventory']}</span>件
 						&nbsp;&nbsp;&nbsp;
 						<button class="mui-btn btn-nob" id="freight_rule" onclick="">包邮（不包含偏远地区）</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</p>

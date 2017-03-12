@@ -4,20 +4,21 @@ use Common\Controller\HomebaseController;
 /**
  * 微信支付
  */
-class WeixinpayController extends HomeBaseController{
+class WeixinpayController extends HomebaseController{
 
     /**
      * notify_url接收页面
      */
     public function notify(){
         // 导入微信支付sdk
-        vendor('Weixinpay.Weixinpay');
+        vendor('WxPay.Weixinpay');
         $wxpay=new \Weixinpay();
         $result=$wxpay->notify();
         if ($result) {
             // 验证成功 修改数据库的订单状态等 $result['out_trade_no']为订单号
             echo '验证成功';
         }
+        dump($result);
     }
 
     /**
@@ -27,7 +28,7 @@ class WeixinpayController extends HomeBaseController{
      */
     public function pay(){
         // 导入微信支付sdk
-        vendor('Weixinpay.Weixinpay');
+        vendor('WxPay.Weixinpay');
         $wxpay=new \Weixinpay();
         // 获取jssdk需要用到的数据
         $data=$wxpay->getParameters();

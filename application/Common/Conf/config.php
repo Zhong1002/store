@@ -94,6 +94,13 @@ $configs= array(
         	'__STATICS__' => __ROOT__.'/statics/',
             '__WEB_ROOT__'=>__ROOT__
         ),
+		'WEIXINPAY_CONFIG'       => array(
+			'APPID'              => 'wxc3cc0ce351b3bf86', // 微信支付APPID
+			'MCHID'              => '1433467002', // 微信支付MCHID 商户收款账号
+			'KEY'                => 'ihpiwmgonwofbwefwef55s1fw6efWf66', // 微信支付KEY
+			'APPSECRET'          => '5c6913157773e47eb3d9cab72b103f3d',  //公众帐号secert
+			'NOTIFY_URL'         => 'http://www.ddbookstore.com/index.php?g=WeChat&m=Weixinpay&a=notify', // 接收支付状态的连接
+		),
 );
 
 return  array_merge($configs,$db,$runtime_config);

@@ -53,5 +53,3 @@ class WxWebNotify extends \WxPayNotify{
 
 	
 }
-
-?>
