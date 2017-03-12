@@ -229,7 +229,7 @@ class IndexController extends HomebaseController{
 //     	$token = 'mynameisjason'; //微信后台填写的TOKEN
 //     	$crypt = 'mCaFEbOH52kmqsiLqC1y1iyXxFbxTOObZ4IxKJgeQlZ'; //消息加密KEY（EncodingAESKey）
     	$appsecret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
-    	$redirect_uri = leuu('User/index');
+    	$redirect_uri = 'http://www.ddbookstore.com/index.php?g=WeChat&m=User&a=index';
     	
     	/* 加载微信高级接口SDK */
     	$token = session("token");
@@ -249,7 +249,7 @@ class IndexController extends HomebaseController{
     		array(
     			'type' => 'view',
     			'name' => '在线书店',
-    			'url'  => leuu('Book/Index/index'),
+    			'url'  => 'http://www.ddbookstore.com/index.php?g=&m=Index&a=index',
     		),
     		array(
     			'name' => '会员中心',
@@ -262,7 +262,7 @@ class IndexController extends HomebaseController{
     				array(
     					'type' => 'view',
     					'name' => '个人中心',
-    					'url'  => leuu('Book/Member/index'),
+    					'url'  => 'http://www.ddbookstore.com/index.php?g=&m=Member&a=index',
     				),
     			),
     		),

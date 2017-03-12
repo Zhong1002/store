@@ -15,7 +15,7 @@ class UserController extends HomebaseController{
 	
 	 public function index(){
 	 	 $usersThird = M('MemberThird');
- 	  	 $userURL = leuu('Book/Member/index');
+ 	  	 $userURL = 'http://www.ddbookstore.com/index.php?g=&m=Member&a=index';
          $appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
          $token = 'mynameisjason'; //微信后台填写的TOKEN
          $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
