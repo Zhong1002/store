@@ -4,7 +4,7 @@ use Common\Controller\HomebaseController;
 /**
  * 微信支付
  */
-class WeixinpayController extends HomebaseController{
+class WxpaytestController extends HomebaseController{
 
     /**
      * notify_url接收页面
