@@ -26,7 +26,7 @@ class WxPayConfig
 	const MCHID = '1433467002';
 	const KEY = 'ihpiwmgonwofbwefwef55s1fw6efWf66';
 	const APPSECRET = '5c6913157773e47eb3d9cab72b103f3d';
-	const NOTIFY_URL='http://test.remay-sz.com/index.php/rapiv2/payhook/wx_hook';
+	const NOTIFY_URL='http://www.ddbookstore.com/index.php?g=WeChat&m=Weixinpay&a=notify';
 	
 	//=======【证书路径设置】=====================================
 	/**

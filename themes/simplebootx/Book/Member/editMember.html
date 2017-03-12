@@ -17,7 +17,7 @@
             </li>
             
             <li class="mui-table-view-cell">
-                <a id="myMobile" class="mui-navigate-right">
+                <a id="myMobile" class="mui-navigate-right" href="{:U('Member/editPhone')}">
                     <span>手机号码</span>    
                     <span style="float:right;margin-right:20px;">{$information['mobile']}</span>
                 </a>
@@ -46,10 +46,5 @@
 </div>
 <tc_include file="Public:bookfooter" />
 <tc_include file="Public:bookscripts" />
-<script>
-$('#myMobile').click(function() {
-	mui.toast("手机号码作为登录方式，暂时无法修改");
-});
-</script>
 </body>
 </html>

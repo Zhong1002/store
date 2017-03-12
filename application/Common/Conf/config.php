@@ -94,14 +94,6 @@ $configs= array(
         	'__STATICS__' => __ROOT__.'/statics/',
             '__WEB_ROOT__'=>__ROOT__
         ),
-		
-		'WEIXINPAY_CONFIG'       => array(
-			'APPID'              => '', // 微信支付APPID
-			'MCHID'              => '', // 微信支付MCHID 商户收款账号
-			'KEY'                => '', // 微信支付KEY
-			'APPSECRET'          => '',  //公众帐号secert
-			'NOTIFY_URL'         => leuu('WeChat/Weixinpay/notify'), // 接收支付状态的连接
-		),
 );
 
 return  array_merge($configs,$db,$runtime_config);

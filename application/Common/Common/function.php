@@ -2072,6 +2072,8 @@ function sp_get_file_extension($filename){
 /**
  * 检查手机是否还可以发送手机验证码,并返回生成的验证码
  * @param string $mobile
+ * @param int $expire_time 默认为当前时间加上1800s
+ * @return mixed $result 验证码(int)或者false
  */
 function sp_get_mobile_code($mobile,$expire_time){
     if(empty($mobile)) return false;
@@ -2085,11 +2087,9 @@ function sp_get_mobile_code($mobile,$expire_time){
         $result = true;
     }else{
         $send_time=$find_log['send_time'];
-        $today_start_time= strtotime(date('Y-m-d',$current_time));
-        if($send_time<$today_start_time){
+//         $today_start_time= strtotime(date('Y-m-d',$current_time));
+        if(($send_time<$current_time) && ($find_log['count']<$max_count)) {
             $result = true;
-        }else if($find_log['count']<$max_count){
-            $result=true;
         }
     }
     

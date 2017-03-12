@@ -16,7 +16,7 @@ class MemberController extends HomebaseController{
 	
 	public function _initialize() {
 		parent::_initialize();
-		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
+// 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
 		$this->users_model = M('Member');
 		$this->address_model = M('MemberAddress');
 		$this->order_model = M('Order');
@@ -276,9 +276,74 @@ class MemberController extends HomebaseController{
 		$this->ajaxReturn($mydata, 'AJAX_UPLOAD');
 	}
 	
-	public function testAvatar() {
+	/*public function testAvatar() {
 		$photo = $_FILES;
 		dump($photo);
+	}*/
+	
+	public function editPhone() {
+		$this->display();
+	}
+	
+	public function sendMessage() {
+		$rules = array(
+			//array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
+			array('mobile', '/^\d{1,20}$/', '手机号为1-20位的数字', 1),
+			array('mobile', '', '手机号已经注册', 0, 'unique', 1),
+		);
+		
+		$data = $this->users_model->validate($rules)->create();
+		if($data === false){
+			$this->error($this->users_model->getError());
+		}
+		
+		$mobile = $data['mobile'];
+		$expire_time = time() + 180;								//验证码有效时间为3分钟
+		$code = sp_get_mobile_code($mobile,$expire_time);			//生成验证码
+		if($code) {
+			$result = sp_mobile_code_log($mobile,$code,$expire_time);			//在数据库中存储数据
+				
+			$SMS = R('Util/Sms/SendRegisterSms', array((string)$code,$mobile));
+			if($SMS->result->success) {
+				$this->success("发送成功");
+			}else {
+				$this->error("发送失败");
+			}
+		}else {
+			$this->error("最多发送5条");
+		}
+	}
+	
+	public function savePhone() {
+		$user_id = sp_get_current_userid();
+		
+		$rules = array(
+				//array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
+				array('mobile', '/^\d{1,20}$/', '手机号为1-20位的数字', 1),
+				array('mobile', '', '手机号已经注册', 0, 'unique', 1),
+		);
+		
+		$data = $this->users_model->validate($rules)->create();
+		if($data === false){
+			$this->error($this->users_model->getError());
+		}
+		
+		$mobile = $data['mobile'];
+		$mobile_verify = I('mobile_verify','','/^\d{6}$/');
+		
+		$result = sp_check_mobile_verify_code($mobile, $mobile_verify);   //检测验证码是否正确
+		if($result) {
+			$rst = $this->users_model->where(array('member_id'=>$user_id))->setField($data);
+			if($rst !== false) {
+				session('user.mobile',$mobile);
+				$this->success("修改成功",leuu('Member/editMember'));
+			}else {
+				$this->error($this->users_model->getError());
+			}
+		}else {
+			$this->error('验证码不正确');
+		}
+		
 	}
 	
 	public function editNiceName() {
@@ -503,6 +568,21 @@ class MemberController extends HomebaseController{
 		$res['result2']=$this->orderBooks;
 		$this->ajaxReturn($res, 'json');
 	}
+	
+	/*public function testSMS() {
+		$mobile = '15862333235';
+		$expire_time = time() + 60;
+		$code = sp_get_mobile_code($mobile,$expire_time);			//生成验证码
+		$result = sp_mobile_code_log($mobile,$code,$expire_time);			//在数据库中存储数据
+		
+		$SMS = R('Util/Sms/SendRegisterSms', array((string)$code,$mobile));
+		if($SMS->result->success) {
+			$rst = sp_check_mobile_verify_code($mobile,$code);
+			dump($rst);
+		}else {
+			echo 'error!';
+		}
+	}*/
 	
 	public function loginOut() {
 		session('user',null);
