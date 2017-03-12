@@ -11,6 +11,7 @@ class WeixinpayController extends HomebaseController{
      */
     public function notify(){
     	$order_model = M('Order');
+    	$order_model->add(array(order_sn=>111));
         // 导入微信支付sdk
         vendor('WxPay.Weixinpay');
         $wxpay=new \Weixinpay();
