@@ -65,10 +65,8 @@
 	    var payStatus = 0;
         switch(orderStatus) {
         	case 1: {
-        	    var result = confirm("确认付款？");
-                if(result) {
-                    payStatus = 2;          //已付款，待发货
-                }
+        		var url = "{:leuu('WeChat/Weixinpay/pay')}&out_trade_no=" + order_id;
+            	document.location.href = url;
         	}break;
         	case 2: {
                 mui.toast('提醒成功');

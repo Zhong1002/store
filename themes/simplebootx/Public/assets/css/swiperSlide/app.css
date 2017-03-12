@@ -155,8 +155,10 @@ nav.menu-bar a.fr{float: right;font-size: 0.8rem;}
 
 .webpay-notify {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
+    margin-top: -41px;
+    margin-left: -32px;
 }
 
 .spin-body {
