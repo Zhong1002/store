@@ -40,7 +40,7 @@ class ShoppingController extends HomebaseController{
 			$this->assign('books', $books);
 			$this->display();
 		} else {
-			$this->redirect("WeChat/User/index");
+			$this->redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		}
 	}
 	
