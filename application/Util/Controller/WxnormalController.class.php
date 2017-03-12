@@ -2,6 +2,8 @@
 namespace Util\Controller;
 use Think\Controller;
 
+vendor('WeChat.WechatAuth#class');
+
 /**
  * 网页支付接口
  * @author Jason
