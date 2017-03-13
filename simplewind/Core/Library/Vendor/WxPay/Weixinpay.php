@@ -13,7 +13,7 @@ class Weixinpay {
         'MCHID'              => '', // 微信支付MCHID 商户收款账号
         'KEY'                => '', // 微信支付KEY
         'APPSECRET'          => '',  //公众帐号secert
-        'NOTIFY_URL'         => 'http://www.ddbookstore.com/index.php?g=WeChat&m=Weixinpay&a=notify', // 接收支付状态的连接  改成自己的域名
+        'NOTIFY_URL'         => 'http://www.notify.ddbookstore.com', // 接收支付状态的连接  改成自己的域名
         );
 
     // 构造函数
@@ -205,7 +205,7 @@ class Weixinpay {
             // 生成签名
             $data['paySign']=$this->makeSign($data);
             
-            $this->assign('order_id',$out_trade_no);
+            $data['order_id']=$out_trade_no;
             return $data;
         }
     }
