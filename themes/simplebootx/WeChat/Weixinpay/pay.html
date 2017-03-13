@@ -29,7 +29,7 @@
 							   '<h4>支付失败</h4>'
 	                $('.webpay-notify').append(htmlstr);
 	            }
-	            var url = "{:leuu('Book/Shopping/orderDetail')}&orderID=" + data.out_trade_no;
+	            var url = "{:leuu('Book/Shopping/orderDetail',array('orderID=>$order_id'))}";
             	document.location.href = url;
 	        }
 	    );

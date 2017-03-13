@@ -13,7 +13,7 @@ class WxWebNotify extends \WxPayNotify{
 	//重写回调处理函数
 	public function NotifyProcess($data, &$msg)
 	{
-		
+		\Think\Log::write( json_encode($data),'ERR','File',C('LOG_PATH').'paylog.log');
 		
 		if($data['return_code']!='SUCCESS'||$data['result_code']!='SUCCESS'){
 			\Think\Log::write( json_encode($data),'ERR','File',C('LOG_PATH').'paylog.log');

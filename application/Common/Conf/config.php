@@ -77,6 +77,12 @@ $configs= array(
         'URL_PATHINFO_DEPR'     => '/',	// PATHINFO模式下，各参数之间的分割符号
         'URL_HTML_SUFFIX'       => '',  // URL伪静态后缀设置
         
+		'URL_MODULE_MAP' => array('bookadmin'=>'admin'),
+		'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
+		'APP_SUB_DOMAIN_RULES' => array(
+			'notify' => 'WeChat/Weixinpay/notify', // admin子域名指向Admin模块
+		),
+        
         'VAR_PAGE'				=>"p",
         
         'URL_ROUTER_ON'			=> true,
@@ -99,7 +105,7 @@ $configs= array(
 			'MCHID'              => '1433467002', // 微信支付MCHID 商户收款账号
 			'KEY'                => 'ihpiwmgonwofbwefwef55s1fw6efWf66', // 微信支付KEY
 			'APPSECRET'          => '5c6913157773e47eb3d9cab72b103f3d',  //公众帐号secert
-			'NOTIFY_URL'         => 'http://www.ddbookstore.com/index.php?g=WeChat&m=Weixinpay&a=notify', // 接收支付状态的连接
+			'NOTIFY_URL'         => 'http://www.ddbookstore.com/WeChat/Weixinpay/notify', // 接收支付状态的连接
 		),
 );
 
