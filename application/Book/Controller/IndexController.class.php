@@ -43,8 +43,7 @@ class IndexController extends HomebaseController{
 // 		$this->assign('slides_end',$slides_end);
 		$this->display();*/
 		
-		echo $_SERVER['SystemRoot'];
-		echo  $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+		echo $_SERVER['SERVER_SOFTWARE'];
 	}
 	
 	public function search() {
