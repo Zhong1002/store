@@ -80,7 +80,7 @@ $configs= array(
 		'URL_MODULE_MAP' => array('bookadmin'=>'admin'),
 		'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
 		'APP_SUB_DOMAIN_RULES' => array(
-			'book.children.index' => 'Book/Children/index',
+			'detail' => array('Book','m=Children&a=index'),
 		),
         
         'VAR_PAGE'				=>"p",
