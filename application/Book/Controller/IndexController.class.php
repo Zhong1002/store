@@ -13,7 +13,7 @@ class IndexController extends HomebaseController{
 	
 	public function index() {
 // 		$goods_model = M('Goods');    //从数据库中选取数据
-		/*$types_model = M('GoodsType');
+		$types_model = M('GoodsType');
 		$slide_model = M('AppAd');
 
 		//根据parent来选取type_id (暂时未实现 ) 还要注意每个子分类的书籍个数
@@ -41,8 +41,7 @@ class IndexController extends HomebaseController{
 		$this->assign('sliCount',$sliCount-1);
 // 		$this->assign('slides_start',$slides_start);
 // 		$this->assign('slides_end',$slides_end);
-		$this->display();*/
-		echo phpversion();
+		$this->display();
 	}
 	
 	public function search() {
