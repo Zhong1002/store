@@ -36,7 +36,8 @@ class WeixinpayController extends HomebaseController{
         $data=$wxpay->getParameters();
         // 将数据分配到前台页面
         $assign=array(
-            'data'=>json_encode($data)
+            'data'=>json_encode($data['data']),
+        	'order_id'=>$data['order_id']
         );
         $this->assign($assign);
         $this->display();

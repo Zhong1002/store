@@ -30,8 +30,7 @@
 	                $('.webpay-notify').append(htmlstr);
 	            }
 
-	            var url = "{:leuu('Book/Shopping/orderDetail',array('orderID'=>$data['order_id']))}";
-
+	            var url = "{:leuu('Book/Shopping/orderDetail',array('orderID'=>$order_id))}";
             	document.location.href = url;
 	        }
 	    );

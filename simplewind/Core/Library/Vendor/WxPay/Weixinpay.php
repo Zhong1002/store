@@ -205,8 +205,9 @@ class Weixinpay {
             // 生成签名
             $data['paySign']=$this->makeSign($data);
             
-            $data['order_id']=$out_trade_no;
-            return $data;
+            $alldata['order_id']=$out_trade_no;
+            $alldata['data']=$data;
+            return $alldata;
         }
     }
 
