@@ -157,19 +157,24 @@ class Weixinpay {
      * @return array jssdk需要用到的数据
      */
     public function getParameters(){
+    	$order_model=M('Order');
         // 获取配置项
         $config=$this->config;
         // 如果没有get参数没有code；则重定向去获取openid；
         if (!isset($_GET['code'])) {
-            // 获取订单号
-            $out_trade_no=I('get.out_trade_no',1,'intval');
-            // 返回的url
-            $redirect_uri=U('WeChat/Weixinpay/pay','','',true);
-            $redirect_uri=urlencode($redirect_uri);
-            $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$config['APPID'].'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_base&state='.$out_trade_no.'#wechat_redirect';
-            redirect($url);
+        	// 获取订单号
+        	$out_trade_no=I('get.out_trade_no',1,'intval');
+        	$order_status = $order_model->where(array('order_id'=>$out_trade_no))->getField('status');
+        	if ($order_status === '1') {       	//判断订单状态是否为未付款
+	            // 返回的url
+	            $redirect_uri=U('WeChat/Weixinpay/pay','','',true);
+	            $redirect_uri=urlencode($redirect_uri);
+	            $url='https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$config['APPID'].'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_base&state='.$out_trade_no.'#wechat_redirect';
+	            redirect($url);
+        	}else {
+    			$this->error('抱歉,订单异常,请重新下单',leuu('Book/Member/order'));
+    		}
         }else{
-        	$order_model=M('Order');
             // 如果有code参数；则表示获取到openid
             $code=I('get.code');
             // 取出订单号
