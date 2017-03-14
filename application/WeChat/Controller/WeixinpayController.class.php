@@ -30,7 +30,7 @@ class WeixinpayController extends HomebaseController{
      */
     public function pay(){
     	$order_model=M('Order');
-    	$order_id=I('get.out_trade_no',1,'intval');
+    	$order_id=I('get.out_trade_no');
     	$order_status = $order_model->where(array('order_id'=>$order_id))->getField('status');
     	if ($order_status === '1') {       	//判断订单状态是否为未付款
     		// 导入微信支付sdk
