@@ -33,18 +33,18 @@ class WeixinpayController extends HomebaseController{
     	$order_id=I('get.out_trade_no');
     	$order_status = $order_model->where(array('order_id'=>$order_id))->getField('status');
     	if ($order_status === '1') {       	//判断订单状态是否为未付款
-    		// 导入微信支付sdk
-    		vendor('WxPay.Weixinpay');
-    		$wxpay=new \Weixinpay();
-    		// 获取jssdk需要用到的数据
-    		$data=$wxpay->getParameters();
-    		// 将数据分配到前台页面
-    		$assign=array(
-    				'data'=>json_encode($data['data']),
-    				'order_id'=>$data['order_id']
-    		);
-    		$this->assign($assign);
-    		$this->display();
+//     		// 导入微信支付sdk
+//     		vendor('WxPay.Weixinpay');
+//     		$wxpay=new \Weixinpay();
+//     		// 获取jssdk需要用到的数据
+//     		$data=$wxpay->getParameters();
+//     		// 将数据分配到前台页面
+//     		$assign=array(
+//     				'data'=>json_encode($data['data']),
+//     				'order_id'=>$data['order_id']
+//     		);
+//     		$this->assign($assign);
+//     		$this->display();
     	}else {
     		//$this->error('抱歉,订单异常,请重新下单',leuu('Book/Member/order'));
     	}
