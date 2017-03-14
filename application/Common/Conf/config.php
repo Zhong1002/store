@@ -78,10 +78,10 @@ $configs= array(
         'URL_HTML_SUFFIX'       => '',  // URL伪静态后缀设置
         
 		'URL_MODULE_MAP' => array('bookadmin'=>'admin'),
-		'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
+		/*'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
 		'APP_SUB_DOMAIN_RULES' => array(
 			'detail' => 'Book/Children/index',
-		),
+		),*/
         
         'VAR_PAGE'				=>"p",
         
@@ -105,7 +105,7 @@ $configs= array(
 			'MCHID'              => '1433467002', // 微信支付MCHID 商户收款账号
 			'KEY'                => 'ihpiwmgonwofbwefwef55s1fw6efWf66', // 微信支付KEY
 			'APPSECRET'          => '5c6913157773e47eb3d9cab72b103f3d',  //公众帐号secert
-			'NOTIFY_URL'         => 'http://www.ddbookstore.com/WeChat/Weixinpay/notify', // 接收支付状态的连接
+			'NOTIFY_URL'         => 'http://www.ddbookstore.com/index.php/WeChat/Weixinpay/notify', // 接收支付状态的连接
 		),
 );
 
