@@ -11,7 +11,7 @@ class ShoppingController extends HomebaseController{
 	
 	public function _initialize() {
 		parent::_initialize();
-// 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
+		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
 		$this->goods_model = M('Goods');
 		$this->cart_model = M('MemberCart');
 		$this->order_model = M('Order');
@@ -333,7 +333,7 @@ class ShoppingController extends HomebaseController{
 			if($detailRst === false) $this->error('操作出错',leuu('Member/order'),1);
 			
 			// 前往支付
-			redirect(leuu('WeChat/Weixinpay/pay',array('out_trade_no'=>$orderRst)));
+			dump(leuu('WeChat/Weixinpay/pay',array('out_trade_no'=>$orderRst)));
 			
 // 			redirect(leuu('Shopping/orderDetail', array('orderID' => $orderRst)));
 		}else {
