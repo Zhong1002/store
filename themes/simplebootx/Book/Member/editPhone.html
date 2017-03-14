@@ -18,6 +18,9 @@
                 <input style="width:55%;" type="text" name="mobile_verify" placeholder="验证码,最多发送5次" />
                 <button style="min-width:95px;margin-right: 5%;" type="submit" class="mui-btn js-ajax-submit" id="sendMessage" data-action="{:leuu('Member/sendMessage')}">获取验证码</button>
             </div>
+            <div class="mui-input-row">
+                <label style="width:100%;">验证码在3分钟内有效</label>
+            </div>
             <div class="mui-button-row">
                 <button type="submit" class="mui-btn js-ajax-submit red" id="savePhone" data-action="{:leuu('Member/savePhone')}" data-wait="1000">确认并保存</button>
             </div>

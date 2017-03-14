@@ -22,7 +22,7 @@ class CronController extends HomebaseController {
 		$where = array(
 			'a.status'=>1,
 			'a.create_time'=>array(
-				'BETWEEN',array($time-1000,$time-900),
+				'lt',$time-900
 			),
 		);
 		$order = $this->order_model
@@ -47,6 +47,8 @@ class CronController extends HomebaseController {
 			}else {
 				echo '更新失败';
 			}
+		}else {
+			echo '区间内无数据';
 		}
 	}
 	
@@ -58,7 +60,7 @@ class CronController extends HomebaseController {
 		$where = array(
 			'a.status'=>3,
 			'a.create_time'=>array(
-				'BETWEEN',array($time-86400*16,$time-86400*15),
+				'lt',$time-86400*15
 			),
 		);
 		$order = $this->order_model
@@ -83,6 +85,8 @@ class CronController extends HomebaseController {
 			}else {
 				echo '更新失败';
 			}
+		}else {
+			echo '区间内无数据';
 		}
 	}
 }

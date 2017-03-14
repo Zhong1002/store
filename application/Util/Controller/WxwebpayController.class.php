@@ -6,7 +6,7 @@ use Think\Controller;
  * @author Jason
  *
  */
-class WebpayController extends Controller {
+class WxwebpayController extends Controller {
 
 	/**
 	 * 获取支付信息

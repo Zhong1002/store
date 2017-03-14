@@ -72,16 +72,16 @@ $configs= array(
         
         /* URL设置 */
         'URL_CASE_INSENSITIVE'  => false,   // 默认false 表示URL区分大小写 true则表示不区分大小写
-        'URL_MODEL'             => 1,       // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
+        'URL_MODEL'             => 2,       // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
         // 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式，提供最好的用户体验和SEO支持
         'URL_PATHINFO_DEPR'     => '/',	// PATHINFO模式下，各参数之间的分割符号
         'URL_HTML_SUFFIX'       => '',  // URL伪静态后缀设置
         
 		'URL_MODULE_MAP' => array('bookadmin'=>'admin'),
-		/*'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
+		'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
 		'APP_SUB_DOMAIN_RULES' => array(
-			'detail.ddbookstore.com' => 'Book/Children/index',
-		),*/
+			'detail' => 'Book/Children/index',
+		),
         
         'VAR_PAGE'				=>"p",
         
@@ -105,7 +105,7 @@ $configs= array(
 			'MCHID'              => '1433467002', // 微信支付MCHID 商户收款账号
 			'KEY'                => 'ihpiwmgonwofbwefwef55s1fw6efWf66', // 微信支付KEY
 			'APPSECRET'          => '5c6913157773e47eb3d9cab72b103f3d',  //公众帐号secert
-			'NOTIFY_URL'         => 'http://www.ddbookstore.com/index.php', // 接收支付状态的连接
+			'NOTIFY_URL'         => 'http://www.ddbookstore.com/WeChat/Weixinpay/notify', // 接收支付状态的连接
 		),
 );
 
