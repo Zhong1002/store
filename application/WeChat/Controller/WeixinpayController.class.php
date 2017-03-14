@@ -46,8 +46,9 @@ class WeixinpayController extends HomebaseController{
     		$this->assign($assign);
     		$this->display();
     	}else {
-    		$this->error('抱歉,订单异常,请重新下单',leuu('Book/Member/order'));
+    		//$this->error('抱歉,订单异常,请重新下单',leuu('Book/Member/order'));
     	}
+    	dump($order_status);
     }
 
 }
