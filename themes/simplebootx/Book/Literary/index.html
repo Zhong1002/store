@@ -4,7 +4,7 @@
 	<tc_include file="Public:booknav" />
 	<div class="mui-content">
 		<foreach name='types' item='oVo' key='k'>
-			<div class="form-tit mt20 onclick" id="&tid={$oVo['type_id']}">
+			<div class="form-tit mt20 onclick" id="/tid/{$oVo['type_id']}">
 				{$oVo['name']}<span class="mui-icon mui-icon-arrowright fr"></span>
 			</div>
 			<ul class="mui-table-view">

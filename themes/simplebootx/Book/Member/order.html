@@ -19,7 +19,7 @@
                     var htmlstr='';
                     $.each(ordersList,function(k,v){                    //k为1~8循环
                     	htmlstr+='<ul class="mui-table-view">'+
-                    		'<a href="{:leuu('Shopping/orderDetail')}&orderID='+v.order_id+'">'+
+                    		'<a href="{:leuu('Shopping/orderDetail')}/orderID/'+v.order_id+'">'+
                     		'<li class="mui-table-view-cell"><hr />'+
                     		'单号：<span class="orderSN">'+v.order_sn+'</span> <span class="orderStatus red fr">'+v.statusTip1+'</span></li>';
                     	$.each(booksList[k],function(kk,vo){

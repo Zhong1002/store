@@ -52,7 +52,7 @@
                          var cover = (v.cover.indexOf('http') === 0) || (v.cover.indexOf('/') === 0) ? v.cover : ('{:sp_get_asset_upload_path()}' + v.cover);
 
                          htmlstr+='<li class="mui-table-view-cell mui-media">'+
-                             '<a href="{:leuu('Detail/index')}&id='+v.goods_id+'">'+
+                             '<a href="{:leuu('Detail/index')}/id/'+v.goods_id+'">'+
                              '<img class="mui-media-object mui-pull-left" src="'+cover+'">'+
                              '<div class="mui-media-body">'+title+
                              '<p class="price">价格：<span class="delete">￥'+ v.pre_price+'</span> <span class="red">￥'+v.now_price+'</span> ['+zk+'折]</p>'+
