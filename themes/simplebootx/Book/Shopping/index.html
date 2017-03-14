@@ -130,7 +130,7 @@
 	/**
 	 * 删除商品
 	 */
-	$(".cart-delete").click(function() {
+	$(".cart-delete").on('tab',function() {
         var myLocation = $(this);
         var i = $(this).index('.cart-delete');
         var goods_id = $('.goods_id').eq(i).val();
