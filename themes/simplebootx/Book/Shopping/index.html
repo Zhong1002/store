@@ -34,6 +34,7 @@
                                 <a href="{:leuu('Detail/index',array('id'=>$vo['goods_id']))}">
                                     <img class="mui-media-object mui-pull-left" src="{:sp_get_asset_upload_path($vo['cover'])}">
                                     <h4 id="bookname">{$vo['name']}</h4>
+                                </a>
                                     <p class="price">价格：
                                     <br /><span class="red">￥</span><span class="now_price red">{$vo['now_price']}</span><span class="delete">&nbsp;￥{$vo['pre_price']}</span>&nbsp;&nbsp;
                                     [<span>
@@ -41,7 +42,6 @@
                                     </span>折]
                                     <br />  
                                     </p>
-                                </a>
                                 <div id="quantity">数量：
                                     <div class="mui-numbox" data-numbox-min='1'>
                                       <button class="mui-btn mui-numbox-btn-minus" type="button" id="myMinus">-</button>
