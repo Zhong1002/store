@@ -77,7 +77,7 @@ $configs= array(
         'URL_PATHINFO_DEPR'     => '/',	// PATHINFO模式下，各参数之间的分割符号
         'URL_HTML_SUFFIX'       => '',  // URL伪静态后缀设置
         
-		'URL_MODULE_MAP' => array('bookadmin'=>'admin'),
+		//'URL_MODULE_MAP' => array('bookadmin'=>'admin'),
 		/*'APP_SUB_DOMAIN_DEPLOY' => 1, // 开启子域名配置
 		'APP_SUB_DOMAIN_RULES' => array(
 			'detail' => 'Book/Children/index',
