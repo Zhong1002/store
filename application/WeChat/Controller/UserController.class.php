@@ -38,7 +38,7 @@ class UserController extends HomebaseController{
          		//已经注册的话直接登录，将member数据以session形式存放
          		$result['id'] = $result['member_id'];
          		session('user',$result);
-         		redirect($userURL,'1','正在为您登陆...');
+         		redirect($userURL,'1','您已注册，正在为您登陆...');
          	}else {
          		$data1 = array(
          				'nick_name'   => $userInfo['nickname'],

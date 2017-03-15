@@ -17,6 +17,7 @@ class MemberController extends HomebaseController{
 	public function _initialize() {
 		parent::_initialize();
 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
+		if (!sp_is_user_login()) redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		$this->users_model = M('Member');
 		$this->address_model = M('MemberAddress');
 		$this->order_model = M('Order');
@@ -26,7 +27,7 @@ class MemberController extends HomebaseController{
 	}
 	
 	public function index() {
-		if(sp_is_user_login()) {
+// 		if(sp_is_user_login()) {
 			$user = session('user');
 			$user_id = $user['id'];
 			$username = $user['nick_name'];
@@ -45,22 +46,22 @@ class MemberController extends HomebaseController{
 			$this->assign('useravatar',$useravatar);
 			$this->assign('wait',$wait);
 			$this->display();
-		} else {
-			redirect(R('Util/Wxnormal/getRequestCodeURL'));
-		}
+// 		} else {
+// 			redirect(R('Util/Wxnormal/getRequestCodeURL'));
+// 		}
 	}
 	
 	public function order() {
-		if(sp_is_user_login()) {
+// 		if(sp_is_user_login()) {
 			
 			$this->myallOrder(1);
 			
 			$this->assign('books',$this->orderBooks);
 			$this->assign('allOrder',$this->allOrder);
 			$this->display();
-		} else {
-			redirect(R('Util/Wxnormal/getRequestCodeURL'));
-		}
+// 		} else {
+// 			redirect(R('Util/Wxnormal/getRequestCodeURL'));
+// 		}
 	}
 	
 	public function waitpayment() {
@@ -171,7 +172,7 @@ class MemberController extends HomebaseController{
 	}
 	
 	public function favorite() {
-		if(sp_is_user_login()) {
+// 		if(sp_is_user_login()) {
 			$user_id = sp_get_current_userid();
 			$favorite_model = M('MemberCollection');
 			
@@ -197,9 +198,9 @@ class MemberController extends HomebaseController{
 			
 			$this->assign('books',$myFavorite);
 			$this->display();
-		} else {
-			redirect(R('Util/Wxnormal/getRequestCodeURL'));
-		}
+// 		} else {
+// 			redirect(R('Util/Wxnormal/getRequestCodeURL'));
+// 		}
 	}
 	
 	public function deleteFav() {
@@ -229,13 +230,13 @@ class MemberController extends HomebaseController{
 	}
 	
 	public function borrow() {
-		if(sp_is_user_login()) {
+// 		if(sp_is_user_login()) {
 			$user_id = sp_get_current_userid();
 			
 			$this->display();
-		} else {
-			redirect(R('Util/Wxnormal/getRequestCodeURL'));
-		}
+// 		} else {
+// 			redirect(R('Util/Wxnormal/getRequestCodeURL'));
+// 		}
 	}
 	
 	public function editMember() {
