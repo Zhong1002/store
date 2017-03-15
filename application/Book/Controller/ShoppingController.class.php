@@ -12,7 +12,6 @@ class ShoppingController extends HomebaseController{
 	public function _initialize() {
 		parent::_initialize();
 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
-		if (!sp_is_user_login()) redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		$this->goods_model = M('Goods');
 		$this->cart_model = M('MemberCart');
 		$this->order_model = M('Order');
@@ -21,7 +20,7 @@ class ShoppingController extends HomebaseController{
 	}
 	
 	public function index() {
-// 		if(sp_is_user_login()) {
+		if(sp_is_user_login()) {
 			$user_id = sp_get_current_userid();
 // 			$join = '__GOODS__ b ON b.goods_id = a.goods_id';
 // 			$books = $this->cart_model
@@ -40,9 +39,9 @@ class ShoppingController extends HomebaseController{
 			
 			$this->assign('books', $books);
 			$this->display();
-// 		} else {
-// 			redirect(R('Util/Wxnormal/getRequestCodeURL'));
-// 		}
+		} else {
+			redirect(R('Util/Wxnormal/getRequestCodeURL'));
+		}
 	}
 	
 	/**
