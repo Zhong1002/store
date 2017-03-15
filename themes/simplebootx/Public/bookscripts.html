@@ -82,11 +82,9 @@
         }
     });
     
- 	// 监听tap事件，解决 a标签 不能跳转页面问题
-    mui('body').on('tap','a',function() {
-    	if(this.href) {
-    		document.location.href=this.href;
-    	}
+ 	// 监听tap事件，解决 a标签 不能跳转页面问题,但是a作为btn的要另作处理
+    mui('body').on('tap','a:not(.mui-btn)',function() {
+   		document.location.href=this.href;
     });
     
 </script>

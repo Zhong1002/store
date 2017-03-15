@@ -202,6 +202,26 @@ class MemberController extends HomebaseController{
 		}
 	}
 	
+	public function deleteFav() {
+		$book_id = I('post.product_id');
+		$favorite_model = M('MemberCollection');
+		$user_id = sp_get_current_userid();
+		if(!empty($book_id)) {
+			$where = array(
+					'member_id'=>$user_id,
+					'goods_id'=>$book_id,
+			);
+			$result = $favorite_model->where($where)->delete();
+			if ($result) {
+				$this->success('删除成功');
+			} else {
+				$this->error($favorite_model->getError());
+			}
+		} else {
+			$this->error('异常，稍后再试');
+		}
+	}
+	
 	public function MemberCenter() {
 		$user_id = sp_get_current_userid();
 			

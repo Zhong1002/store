@@ -25,12 +25,17 @@
                 </li>
                 <foreach name='books' item='vo'>
                 	<li class="mui-table-view-cell">
-                	    <div class="mui-row">
-                	    	<div class="mui-checkbox mui-left mui-col-xs-1">
-                                <label>&nbsp;</label>
-                                <input type="checkbox" class="check-box" name="goods_ids[]" value="{$vo['goods_id']}" />
-                            </div>
-                            <div class="mui-media-body mui-col-xs-10">
+               			<div class="mui-slider-right mui-disabled">
+		                    <input class="goods_id" type="hidden" value="{$vo['goods_id']}" />
+		                    <a class="mui-btn mui-btn-red">删除</a>
+		                </div>
+			            <div class="mui-slider-handle">
+                	    	<div class="mui-row">
+	                	    	<div class="mui-checkbox mui-left mui-col-xs-1">
+	                                <label>&nbsp;</label>
+	                                <input type="checkbox" class="check-box" name="goods_ids[]" value="{$vo['goods_id']}" />
+	                            </div>
+                            <div class="mui-media-body mui-col-xs-11">
                                 <a href="{:leuu('Detail/index',array('id'=>$vo['goods_id']))}">
                                     <img class="mui-media-object mui-pull-left" src="{:sp_get_asset_upload_path($vo['cover'])}">
                                     <h4 id="bookname">{$vo['name']}</h4>
@@ -50,11 +55,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mui-col-xs-1">
-                            	<input type="hidden" class="goods_id" value="{$vo['goods_id']}" />
-                                <button class="mui-btn cart-delete" type="button">
-                                    <span class="mui-icon mui-icon-trash fr red"></span>
-                                </button>
+	                            <!-- div class="mui-col-xs-1">
+	                            	<input type="hidden" class="goods_id" value="{$vo['goods_id']}" />
+	                                <button class="mui-btn cart-delete" type="button">
+	                                    <span class="mui-icon mui-icon-trash fr red"></span>
+	                                </button>
+	                            </div -->
                             </div>
                 	    </div>
                 	</li>
@@ -130,35 +136,42 @@
 	/**
 	 * 删除商品
 	 */
-	$(".cart-delete").click(function() {
+	$('.mui-btn-red').on('tap', function(event) {
+        //用到mui的内置方法，似乎只能用原生js代码
+        var li = this.parentNode.parentNode;
         var myLocation = $(this);
-        var i = $(this).index('.cart-delete');
-        var goods_id = $('.goods_id').eq(i).val();
-        if(confirm("确定删除？")) {
-            $.ajax({
-                type: "post",
-                url: "{:leuu('Shopping/deleteShopping')}",
-                data: {product_id:goods_id},
-                dataType: "json",
-                success: function(str) {
-                    switch(str.result) {
-                    case 1: {
-                        myLocation.parents('li').remove(); 
-                        calculate();
-                    } break;
-                    case 2: {
-                        mui.toast("不存在此书");
-                        window.location.reload();
-                    } break;
-                    case 3: {
-                        mui.toast("查无此书");
-                    } break;
-                    default:break;
-                    }   
-                }
-            });
-        }
-	});
+        var goods_id = $(this).parent().children('.goods_id').val();
+        mui.confirm('确认删除？', '叮当书店', function(e) {
+            if (e.index == 0) {
+                setTimeout(function() {
+                    mui.swipeoutClose(li);        //mui内置方法
+                }, 0);
+            }else {
+            	$.ajax({
+                    type: "post",
+                    url: "{:leuu('Shopping/deleteShopping')}",
+                    data: {product_id:goods_id},
+                    dataType: "json",
+                    success: function(str) {
+                        switch(str.result) {
+                        case 1: {
+                            myLocation.parents('li').remove(); 
+                            calculate();
+                        } break;
+                        case 2: {
+                            mui.toast("不存在此书");
+                            window.location.reload();
+                        } break;
+                        case 3: {
+                            mui.toast("查无此书");
+                        } break;
+                        default:break;
+                        }   
+                    }
+                });
+            }
+        });
+    });
 			
    /**
 	* 检查表单提交是否为空
