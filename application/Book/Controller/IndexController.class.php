@@ -28,7 +28,7 @@ class IndexController extends HomebaseController{
 		$slides = $slide_model->field('image,skip_type,aim_id,url')->where(array('slide_status'=>array('eq',1)))->select();
 		foreach($slides as $i=>$vo) {
 			if($vo['skip_type'] == 1) {             //detail
-				$slides[$i]['url'] = leuu('Detail/index',array('id'=>$vo['aim_id']));
+				$slides[$i]['url'] = '"Detail/index",array("id"=>'.$vo['aim_id'].')';
 			}
 		}
 		$sliCount = $slide_model->where(array('slide_status'=>array('eq',1)))->count();
