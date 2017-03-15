@@ -12,7 +12,7 @@ class ShoppingController extends HomebaseController{
 	public function _initialize() {
 		parent::_initialize();
 		if (!sp_is_weixin()) $this->error('请在微信端访问','',1);
-		if (!sp_is_user_login()) redirect(R('Util/Wxnormal/getRequestCodeURL'));
+		if ((!sp_is_user_login()) && (!IS_AJAX)) redirect(R('Util/Wxnormal/getRequestCodeURL'));
 		$this->goods_model = M('Goods');
 		$this->cart_model = M('MemberCart');
 		$this->order_model = M('Order');
