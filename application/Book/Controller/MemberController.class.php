@@ -607,6 +607,6 @@ class MemberController extends HomebaseController{
 	
 	public function loginOut() {
 		session('user',null);
-		redirect("Index/index");
+		$this->redirect('Index/index');
 	}
 }
