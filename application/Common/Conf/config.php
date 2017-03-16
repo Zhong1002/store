@@ -100,6 +100,12 @@ $configs= array(
         	'__STATICS__' => __ROOT__.'/statics/',
             '__WEB_ROOT__'=>__ROOT__
         ),
+		'WECHAT_CONFIG'      	 => array(
+			'APPID'              => 'wxc3cc0ce351b3bf86', // 微信支付APPID
+			'APPSECRET'          => '5c6913157773e47eb3d9cab72b103f3d',  //公众帐号secert
+			'TOKEN'              => 'mynameisjason', //微信后台填写的TOKEN
+			'CRYPT'         	 => 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6', //消息加密KEY（EncodingAESKey）
+		),
 		'WEIXINPAY_CONFIG'       => array(
 			'APPID'              => 'wxc3cc0ce351b3bf86', // 微信支付APPID
 			'MCHID'              => '1433467002', // 微信支付MCHID 商户收款账号

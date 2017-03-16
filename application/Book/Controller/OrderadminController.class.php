@@ -92,6 +92,14 @@ class OrderadminController extends AdminbaseController{
 		);
 		$rst = $this->order_model->where(array('order_id'=>$order_id))->save($data);
 		if ($rst!==false) {
+			vendor('WeChat.WechatAuth#class');	//给用户推送发货信息
+			$member_third = M('MemberThird');
+			$config = C('WECHAT_CONFIG');
+			$wechatAuth  = new \WechatAuth($config['APPID'], $config['APPSECRET']);
+			$member_id = $this->order_model->where(array('order_id'=>$order_id))->getField('member_id');
+			$openid = $member_third->where(array('member_id'=>$member_id))->getField('uuid');
+			$wechatAuth->sendText($openid, '您的物品已发货，正在由xx快递飞速赶来。快递单号：'.$express['sn']);
+			
 			$result = $this->order_model
 						  ->field('order_id,order_sn')
 						  ->where(array('order_id'=>array('neq',$order_id),'status'=>2))
