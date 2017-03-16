@@ -95,7 +95,16 @@ class OrderadminController extends AdminbaseController{
 			vendor('WeChat.WechatAuth#class');	//给用户推送发货信息
 			$member_third = M('MemberThird');
 			$config = C('WECHAT_CONFIG');
-			$wechatAuth  = new \WechatAuth($config['APPID'], $config['APPSECRET']);
+			$token = session('token');
+			if($token){
+				$wechatAuth = new \WechatAuth($config['APPID'], $config['APPSECRET'], $token);
+			} else {
+				$wechatAuth  = new \WechatAuth($config['APPID'], $config['APPSECRET']);
+				$token = $wechatAuth->getAccessToken();
+			
+				session(array('expire' => $token['expires_in']));
+				session('token', $token['access_token']);
+			}
 			$member_id = $this->order_model->where(array('order_id'=>$order_id))->getField('member_id');
 			$openid = $member_third->where(array('member_id'=>$member_id))->getField('uuid');
 			$wechatAuth->sendText($openid, '您的物品已发货，正在由xx快递飞速赶来。快递单号：'.$express['sn']);
