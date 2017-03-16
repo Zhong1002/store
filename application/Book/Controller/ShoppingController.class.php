@@ -542,7 +542,7 @@ class ShoppingController extends HomebaseController{
 			if($rst2 === false) {
 				$this->order_model->getError();
 			}else {
-				$this->redirect(leuu('Shopping/orderDetail',array('orderID'=>$order_id)));
+				redirect(leuu('Shopping/orderDetail',array('orderID'=>$order_id)));
 			}
 		}else {
 			$this->error('已评价',leuu('Member/waitcomment'),1);
