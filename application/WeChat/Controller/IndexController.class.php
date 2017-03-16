@@ -230,7 +230,6 @@ class IndexController extends HomebaseController{
     }
     
     public function createMenu() {
-    	$this->config = C('WECHAT_CONFIG');
     	$redirect_uri = 'http://www.ddbookstore.com/index.php?g=WeChat&m=User&a=index';
     	
     	/* 加载微信高级接口SDK */
