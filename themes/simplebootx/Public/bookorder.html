@@ -112,38 +112,40 @@
 	/*
 	 * 待付款页面取消订单
 	 */
-	function orderCancel(order_id) {
-        var result = confirm("确认取消？");
-        if(result) {
-            operation(6,order_id);
-        }
+	 function orderCancel(order_id) {
+    	mui.confirm('确认取消？', '叮当书店', function(e) {
+            if (e.index !== 0) {
+            	operation(6,order_id);
+            }
+        });
     }
 	
 	/*
 	 * 删除失效或已完成订单
 	 */
 	function orderDelete(order_id,k) {
-        var result = confirm("确定删除？");
-        if(result) {
-            $.ajax({
-                type: "post",
-                url: "{:U('Shopping/deleteOrder')}",
-                data: {orderID:order_id},
-                dataType: "json",
-                success: function(str) {
-                    switch(str.result) {
-                    case 1: {
-                        mui.toast('删除成功');
-                        $('ul').eq(k).html('');                 //不刷新页面是为了让订单页面保持在当前位置
-                    } break;
-                    case -1: {
-                        alert("操作失败");
-                    } break;
-                    default:break;
-                    }
-                }
-            });
-        }
+		mui.confirm('确认删除？', '叮当书店', function(e) {
+            if (e.index !== 0) {
+	            $.ajax({
+	                type: "post",
+	                url: "{:U('Shopping/deleteOrder')}",
+	                data: {orderID:order_id},
+	                dataType: "json",
+	                success: function(str) {
+	                    switch(str.result) {
+	                    case 1: {
+	                        mui.toast('删除成功');
+	                        $('ul').eq(k).html('');                 //不刷新页面是为了让订单页面保持在当前位置
+	                    } break;
+	                    case -1: {
+	                        alert("操作失败");
+	                    } break;
+	                    default:break;
+	                    }
+	                }
+	            });
+            }
+        });
     }
 	
 </script>

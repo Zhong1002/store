@@ -91,7 +91,7 @@
 		var htmlStr2 = "";
 		var htmlStr3 = "";
 		switch(orderStatus){
-    		case "1": {htmlStr1 = "等待付款";htmlStr2 = "现在付款";htmlStr3 = "取消交易";}break;
+    		case "1": {htmlStr1 = "请在2小时内完成付款，否则交易会被关闭";htmlStr2 = "现在付款";htmlStr3 = "取消交易";}break;
     		case "2": {htmlStr1 = "即将发货";htmlStr2 = "提醒发货";}break;
     		case "3": {htmlStr1 = "正在来的路上";htmlStr2 = "确认收货";}break;
     		case "4": {htmlStr1 = "期待您的评价";htmlStr2 = "去评价";}break;
@@ -187,10 +187,11 @@
      * 待付款页面取消订单
      */
     function orderCancel(order_id) {
-        var result = confirm("确认取消？");
-        if(result) {
-            operation(6,order_id);
-        }
+    	mui.confirm('确认取消？', '叮当书店', function(e) {
+            if (e.index !== 0) {
+            	operation(6,order_id);
+            }
+        });
     }
 
 </script>

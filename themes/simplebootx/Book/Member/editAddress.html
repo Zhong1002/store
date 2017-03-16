@@ -60,27 +60,29 @@
     */
 	$('#deleteAddress').on('click', function() {
 		var addrID = "{$addr_id}";
-		if(confirm('确认删除？')) {
-			$.ajax({
-				type: "post",
-				url: "{:leuu('Member/deleteAddress')}",
-				data: {addr_id:addrID},
-				dataType: "json",
-				success: function(str) {
-					switch(str.result) {
-					case 1: {
-						mui.toast("删除成功");
-						document.location.href = "{:leuu('Member/manageAddress')}";
-						//window.history.go(-1);
-					} break;
-					case -1: {
-						mui.toast("操作失败");
-					} break;
-					default:break;
+		mui.confirm('确认删除？', '叮当书店', function(e) {
+            if (e.index !== 0) {
+				$.ajax({
+					type: "post",
+					url: "{:leuu('Member/deleteAddress')}",
+					data: {addr_id:addrID},
+					dataType: "json",
+					success: function(str) {
+						switch(str.result) {
+						case 1: {
+							mui.toast("删除成功");
+							document.location.href = "{:leuu('Member/manageAddress')}";
+							//window.history.go(-1);
+						} break;
+						case -1: {
+							mui.toast("操作失败");
+						} break;
+						default:break;
+						}
 					}
-				}
-			});
-		}
+				});
+            }
+		});
 	});
 </script>
 </body>

@@ -15,14 +15,14 @@ class CronController extends HomebaseController {
 	}
 	
 	/**
-	 * 15分钟交易超时
+	 * 2小时交易超时
 	 */
 	public function index() {
 		$time = time();
 		$where = array(
 			'a.status'=>1,
 			'a.create_time'=>array(
-				'lt',$time-900
+				'lt',$time-2*3600
 			),
 		);
 		$order = $this->order_model
