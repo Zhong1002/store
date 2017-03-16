@@ -105,9 +105,9 @@ class OrderadminController extends AdminbaseController{
 				session(array('expire' => $token['expires_in']));
 				session('token', $token['access_token']);
 			}
-			$member_id = $this->order_model->where(array('order_id'=>$order_id))->getField('member_id');
-			$openid = $member_third->where(array('member_id'=>$member_id))->getField('uuid');
-			$wechatAuth->sendText($openid, '您的物品已发货，正在由xx快递飞速赶来。快递单号：'.$express['sn']);
+			$order_info = $this->order_model->field('order_sn,member_id')->where(array('order_id'=>$order_id))->find();
+			$openid = $member_third->where(array('member_id'=>$order_info['member_id']))->getField('uuid');
+			$wechatAuth->sendText($openid, '您的物品（订单编号：'.$order_info['order_sn'].'）已发货，正在由xx快递飞速赶来。快递单号：'.$express['sn']);
 			
 			$result = $this->order_model
 						  ->field('order_id,order_sn')

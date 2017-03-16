@@ -6,6 +6,8 @@ vendor('WeChat.Wechat#class');
 vendor('WeChat.WechatAuth#class');
 
 class IndexController extends HomebaseController{
+	
+	private $config = array();
 	 /**
      * 微信消息接口入口
      * 所有发送到微信的消息都会推送到该操作
@@ -14,11 +16,9 @@ class IndexController extends HomebaseController{
     public function index($id = ''){
         //调试
         try{
-            $appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
-            $token = 'mynameisjason'; //微信后台填写的TOKEN
-            $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
+            $this->config = C('WECHAT_CONFIG');
             /* 加载微信SDK */
-            $wechat = new \Wechat($token, $appid, $crypt);
+            $wechat = new \Wechat($this->config['TOKEN'], $this->config['APPID'], $this->config['CRYPT']);
             
             /* 获取请求信息 */
             $data = $wechat->request();
@@ -230,19 +230,16 @@ class IndexController extends HomebaseController{
     }
     
     public function createMenu() {
-    	$appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
-//     	$token = 'mynameisjason'; //微信后台填写的TOKEN
-//     	$crypt = 'mCaFEbOH52kmqsiLqC1y1iyXxFbxTOObZ4IxKJgeQlZ'; //消息加密KEY（EncodingAESKey）
-    	$appsecret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
+    	$this->config = C('WECHAT_CONFIG');
     	$redirect_uri = 'http://www.ddbookstore.com/index.php?g=WeChat&m=User&a=index';
     	
     	/* 加载微信高级接口SDK */
     	$token = session("token");
 
         if($token){
-            $wechatAuth = new \WechatAuth($appid, $appsecret, $token);
+            $wechatAuth = new \WechatAuth($this->config['APPID'], $this->config['APPSECRET'], $token);
         } else {
-            $wechatAuth  = new \WechatAuth($appid, $appsecret);
+            $wechatAuth  = new \WechatAuth($this->config['APPID'], $this->config['APPSECRET']);
             $token = $wechatAuth->getAccessToken();
 
             session(array('expire' => $token['expires_in']));

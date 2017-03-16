@@ -7,6 +7,7 @@ vendor('WeChat.WechatAuth#class');
 class UserController extends HomebaseController{
 	
 	protected $users_model;
+	private $config = array();
 	
 	public function _initialize() {
 		parent::_initialize();
@@ -16,13 +17,10 @@ class UserController extends HomebaseController{
 	 public function index(){
 	 	 $usersThird = M('MemberThird');
  	  	 $userURL = 'http://www.ddbookstore.com/index.php?g=&m=Member&a=index';
-         $appid = 'wxc3cc0ce351b3bf86'; //AppID(应用ID)
-         $token = 'mynameisjason'; //微信后台填写的TOKEN
-         $crypt = 'W2c1UGcj9gGdbeKVjdY2eZofJtOn9RNeGBH2ngDEFh6'; //消息加密KEY（EncodingAESKey）
-         $secret = '5c6913157773e47eb3d9cab72b103f3d'; //appsecret
-         
+		 $this->config = C('WECHAT_CONFIG');
+ 	  	 
          /* 加载微信高级接口SDK */
-         $wechatAuth = new \WechatAuth($appid, $secret, $token);
+         $wechatAuth = new \WechatAuth($this->config['APPID'], $this->config['APPSECRET']);
          /*通过code换取网页授权access_token*/
          $content = $wechatAuth->getAccessToken('code',$_GET['code']);
          /*拉取用户信息(需scope为 snsapi_userinfo)*/
