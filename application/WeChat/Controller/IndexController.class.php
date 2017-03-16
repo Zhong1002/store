@@ -7,16 +7,20 @@ vendor('WeChat.WechatAuth#class');
 
 class IndexController extends HomebaseController{
 	
-	protected $config = array();
+	protected $config;
 	 /**
      * 微信消息接口入口
      * 所有发送到微信的消息都会推送到该操作
      * 所以，微信公众平台后台填写的api地址则为该操作的访问地址
      */
+	public function _initialize() {
+		parent::_initialize();
+		$this->config = C('WECHAT_CONFIG');
+	}
+	
     public function index($id = ''){
         //调试
         try{
-            $this->config = C('WECHAT_CONFIG');
             /* 加载微信SDK */
             $wechat = new \Wechat($this->config['TOKEN'], $this->config['APPID'], $this->config['CRYPT']);
             

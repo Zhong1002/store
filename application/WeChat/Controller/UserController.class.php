@@ -7,7 +7,7 @@ vendor('WeChat.WechatAuth#class');
 class UserController extends HomebaseController{
 	
 	protected $users_model;
-	protected $config = array();
+	protected $config;
 	
 	public function _initialize() {
 		parent::_initialize();
