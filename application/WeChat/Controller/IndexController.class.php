@@ -45,9 +45,12 @@ class IndexController extends HomebaseController{
                  * Wechat::MSG_EVENT_LOCATION     //报告位置
                  * Wechat::MSG_EVENT_CLICK        //菜单点击
                  */
-
+				
+//             	$wx_message_model = M('WechatMessage');
+//             	$wxdata['uuid'] = $data['FromUserName'];
+//             	$wxdata['create_time'] = $data['CreateTime'];
                 //记录微信推送过来的数据
-                file_put_contents('./data/wxdata.json', json_encode($data),FILE_APPEND);
+//                 file_put_contents('./data/wxdata.json', json_encode($data),FILE_APPEND);
 
                 /* 响应当前请求(自动回复) */
                 //$wechat->response($content, $type);
@@ -102,10 +105,10 @@ class IndexController extends HomebaseController{
                 }
                 break;
                 
-            case \Wechat::MSG_TYPE_TEXT: {
+            /*case \Wechat::MSG_TYPE_TEXT: {
             		$wechat->replyText("您输入的内容是：{$data['Content']}，稍后等待客服回复");
             	} break;
-                /*switch ($data['Content']) {
+                switch ($data['Content']) {
                     case '文本':
                         $wechat->replyText('欢迎访问叮当书舍公众平台，这是文本回复的内容！');
                         break;
