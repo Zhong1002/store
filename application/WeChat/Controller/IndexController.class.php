@@ -7,7 +7,7 @@ vendor('WeChat.WechatAuth#class');
 
 class IndexController extends HomebaseController{
 	
-	private $config = array();
+	protected $config = array();
 	 /**
      * 微信消息接口入口
      * 所有发送到微信的消息都会推送到该操作
