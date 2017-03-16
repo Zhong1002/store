@@ -47,7 +47,7 @@ class IndexController extends HomebaseController{
                  */
 
                 //记录微信推送过来的数据
-                file_put_contents('./data/data.json', json_encode($data));
+                file_put_contents('./data/wxdata.json', json_encode($data));
 
                 /* 响应当前请求(自动回复) */
                 //$wechat->response($content, $type);
@@ -70,7 +70,7 @@ class IndexController extends HomebaseController{
                 $this->demo($wechat, $data);
             }
         } catch(\Exception $e){
-            file_put_contents('./data/error.json', json_encode($e->getMessage()));
+            file_put_contents('./data/wxerror.json', json_encode($e->getMessage()));
         }
         
     }

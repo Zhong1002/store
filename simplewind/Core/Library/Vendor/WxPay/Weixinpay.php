@@ -80,6 +80,8 @@ class Weixinpay {
         $data=$this->toArray($xml);
         // 保存原sign
         $data_sign=$data['sign'];
+        //记录支付数据
+        file_put_contents('./data/wxpaynotify.json', json_encode($data));
         // sign不参与签名
         unset($data['sign']);
         $sign=$this->makeSign($data);
