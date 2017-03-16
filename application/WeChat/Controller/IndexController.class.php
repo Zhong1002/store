@@ -47,7 +47,7 @@ class IndexController extends HomebaseController{
                  */
 
                 //记录微信推送过来的数据
-                file_put_contents('./data/wxdata.json', json_encode($data));
+                file_put_contents('./data/wxdata.json', json_encode($data),FILE_APPEND);
 
                 /* 响应当前请求(自动回复) */
                 //$wechat->response($content, $type);
