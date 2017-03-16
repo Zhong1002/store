@@ -168,7 +168,9 @@ class IndexController extends HomebaseController{
                         break;
                 }*/
             
-            default:break;
+            default:
+                $wechat->response('', \Wechat::MSG_TYPE_CUSTOMER);
+                break;
         }
     }
 

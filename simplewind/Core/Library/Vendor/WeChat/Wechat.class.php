@@ -27,6 +27,7 @@ class Wechat {
     const MSG_TYPE_MUSIC      = 'music';
     const MSG_TYPE_NEWS       = 'news';
     const MSG_TYPE_EVENT      = 'event';
+    const MSG_TYPE_CUSTOMER   = 'transfer_customer_service';
 
     /**
      * 事件类型常量
