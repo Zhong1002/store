@@ -33,10 +33,27 @@ class ShoppingController extends HomebaseController{
 
 			$Model = D("MemberCartView");
 			$books = $Model
-			->field('goods_id,member_id,num,name,pre_price,now_price,inventory,cover')
+			->field('member_id,goods_id,num,status,name,pre_price,now_price,inventory,cover')
 			->where(array('member_id'=>$user_id))
-			->order('goods_id DESC')
+			->order(array('status'=>'DESC','id'=>'DESC'))
 			->select();
+			
+			$length = count($books,COUNT_NORMAL);
+			for ($i=0;$i<$length;$i++) {
+				if(($books[$i]['inventory']-$books[$i]['num']) < 0) {
+					if ($books[$i]['inventory'] <= 0) {		//库存为0的话设置为失效宝贝
+						$books[$i]['status'] = 0;
+						$field = 'status';
+						$value = 0;
+					}else {
+						$books[$i]['num'] = $books[$i]['inventory'];
+						$field = 'num';
+						$value = $books[$i]['inventory'];
+					}
+					$rst = $this->cart_model->where(array('member_id'=>$books[$i]['member_id'],'goods_id'=>$books[$i]['goods_id']))->setField($field,$value);
+					if ($rst === false) $this->error('哪里出了点错误，请再试一次...');
+				}
+			}
 			
 			$this->assign('books', $books);
 			$this->display();
@@ -253,10 +270,15 @@ class ShoppingController extends HomebaseController{
 			
 			$books = $this->goods_model
 						->alias('a')
-						->field('goods_id,name,cover,now_price,pre_price,num')
+						->field('goods_id,name,cover,now_price,pre_price,inventory,num')
 						->join(array('__MEMBER_CART__ b USING(goods_id)'))
 						->where(array('b.member_id'=>$user_id,'goods_id'=>array('in',$products)))
 						->order('a.goods_id DESC')->select();			//查询顺序要和购物车查询时的顺序一致
+			
+			$length = count($books,COUNT_NORMAL);
+			for ($i=0;$i<$length;$i++) {
+				if(($books[$i]['inventory']-$books[$i]['num']) < 0) $this->error('宝贝数量不够了，正在补货...',leuu('Shopping/index'),2);
+			}
 						
 			//在订单中更换地址
 			if(!empty($addrID)) {

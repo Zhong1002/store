@@ -33,7 +33,9 @@
                 	    	<div class="mui-row">
 	                	    	<div class="mui-checkbox mui-left mui-col-xs-1">
 	                                <label>&nbsp;</label>
-	                                <input type="checkbox" class="check-box" name="goods_ids[]" value="{$vo['goods_id']}" />
+	                                <if condition="$vo['status'] eq 1">
+	                                	<input type="checkbox" class="check-box" name="goods_ids[]" value="{$vo['goods_id']}" />
+	                                </if>
 	                            </div>
                             <div class="mui-media-body mui-col-xs-11">
                                 <a href="{:leuu('Detail/index',array('id'=>$vo['goods_id']))}">
@@ -47,13 +49,19 @@
                                     <br />  
                                     </p>
                                 </a>
-                                <div id="quantity">数量：
-                                    <div class="mui-numbox" data-numbox-min='1'>
-                                      <button class="mui-btn mui-numbox-btn-minus" type="button" id="myMinus">-</button>
-                                      <input class="mui-numbox-input goods_num" type="number" value="{$vo['num']}"/>
-                                      <button class="mui-btn mui-numbox-btn-plus" type="button" id="myPlus">+</button>
-                                    </div>
-                                </div>
+                                <if condition="$vo['status'] eq 0">
+                                	<div>
+	                            		<p>库存不足，正在补货...</p>
+	                            	</div>
+	                            <else/>
+	                            	<div id="quantity">数量：
+	                                    <div class="mui-numbox" data-numbox-min='1'>
+	                                      <button class="mui-btn mui-numbox-btn-minus" type="button" id="myMinus">-</button>
+	                                      <input class="mui-numbox-input goods_num" type="number" value="{$vo['num']}"/>
+	                                      <button class="mui-btn mui-numbox-btn-plus" type="button" id="myPlus">+</button>
+	                                    </div>
+	                                </div>
+                                </if>
                             </div>
 	                            <!-- div class="mui-col-xs-1">
 	                            	<input type="hidden" class="goods_id" value="{$vo['goods_id']}" />

@@ -19,7 +19,7 @@ class AdminTermController extends AdminbaseController {
 		$this->assign("taxonomys",$this->taxonomys);
 	}
 	function index(){
-		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
+		$result = $this->terms_model->order(array("listorder"=>"DESC"))->select();
 		
 		$tree = new \Tree();
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
