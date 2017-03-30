@@ -97,7 +97,7 @@ class ShelvesadminController extends AdminbaseController{
 					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
 				}
 			}
-			$_POST['book']['cover'] = sp_asset_relative_url($_POST['book']['cover']);
+			$_POST['book']['cover'] = sp_asset_fetch_url($_POST['book']['cover']);
 			$_POST['book']['create_time']=strtotime($_POST['book']['create_time']);
 			
 			$article=I("post.book");
