@@ -1074,7 +1074,7 @@ function sp_asset_fetch_url($asset_url){
 	if(strpos($asset_url,"http")===0){
 		$qiniu = new \Think\Upload\Driver\Qiniu(sp_get_cmf_settings('storage')['Qiniu']);	// 实例化七牛上传驱动类
 		$qiniuKey = $qiniu->qiniu->fetchThird($asset_url);
-		return $qiniuKey;
+		return $qiniuKey ? $qiniuKey : $asset_url;
 	}else{
 		return str_replace(C("TMPL_PARSE_STRING.__UPLOAD__"), "", $asset_url);
 	}

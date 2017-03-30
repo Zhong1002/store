@@ -93,4 +93,13 @@ class IndexController extends HomebaseController{
 			$this->ajaxReturn($res, 'json');
 		}
 	}
+	
+	public function test() {
+		$url = 'https://images-cn.ssl-images-amazon.com/images/I/517C0wj5PBL._AA218_.jpg';
+		$qiniu = new \Think\Upload\Driver\Qiniu(sp_get_cmf_settings('storage')['Qiniu']);	// 实例化七牛上传驱动类
+		$qiniuKey = $qiniu->qiniu->fetchThird($url);
+	
+		dump($qiniuKey);
+	}
+	
 }

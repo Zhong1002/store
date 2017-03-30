@@ -215,24 +215,25 @@ class QiniuStorage {
 		}
 		$savepath=$app.'/'.date('Ymd').'/'.substr($url, strrpos($url, $pathSep)+1);   //使用图片链接中的原名称
 	
-		$encodedURL = $this->Qiniu_Encode($url);
-		$encodedEntryURI = $this->Qiniu_Encode($this->bucket . ":" .  $savepath);
-		$url = $this->QINIU_Third_HOST . '/fetch/' . $encodedURL . '/to/' . $encodedEntryURI;
-		$accessToken = $this->accessToken($url);
+// 		$encodedURL = $this->Qiniu_Encode($url);
+// 		$encodedEntryURI = $this->Qiniu_Encode($this->bucket . ":" .  $savepath);
+// 		$url = $this->QINIU_Third_HOST . '/fetch/' . $encodedURL . '/to/' . $encodedEntryURI;
+// 		$accessToken = $this->accessToken($url);
 	
-		$header[] = 'Host: iovip.qbox.me';
-		$header[] = 'Content-Type:application/x-www-form-urlencoded';
-		$header[] = 'Authorization: QBox ' . $accessToken;
+// 		$header[] = 'Host: iovip.qbox.me';
+// 		$header[] = 'Content-Type:application/x-www-form-urlencoded';
+// 		$header[] = 'Authorization: QBox ' . $accessToken;
 		 
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, '');
+// 		$curl = curl_init();
+// 		curl_setopt($curl, CURLOPT_URL, $url);
+// 		curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+// 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+// 		curl_setopt($curl, CURLOPT_POSTFIELDS, '');
 		 
-		$result = json_decode(curl_exec($curl), true);
-		curl_close($curl);
-		return $result['key'] ? $result['key'] : false;
+// 		$result = json_decode(curl_exec($curl), true);
+// 		curl_close($curl);
+// 		return $result['key'] ? $result['key'] : false;
+		return $savepath;
 	}
 
 	//重命名单个文件
