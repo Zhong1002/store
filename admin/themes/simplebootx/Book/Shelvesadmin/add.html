@@ -111,7 +111,7 @@
 							<td>
 								<div style="text-align: center;">
 									<input type="hidden" name="book[cover]" id="thumb" value="">
-									<a href="javascript:upload_one_image('图片上传','#thumb');">
+									<a id="uploadImage" href="javascript:upload_one_image('图片上传','#thumb');">
 										<img src="__TMPL__Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand" />
 									</a>
 									<input type="button" class="btn btn-small" onclick="$('#thumb-preview').attr('src','__TMPL__Public/assets/images/default-thumbnail.png');$('#thumb').val('');return false;" value="取消图片">
@@ -179,6 +179,10 @@
 	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript">
+		//编辑器
+		editorcontent = new baidu.editor.ui.Editor();
+		editorcontent.render('content');
+	
 		$(function() {
 			$(".js-ajax-close-btn").on('click', function(e) {
 				e.preventDefault();
@@ -203,9 +207,6 @@
 			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
 				//javascript
 
-				//编辑器
-				editorcontent = new baidu.editor.ui.Editor();
-				editorcontent.render('content');
 				try {
 					editorcontent.sync();
 				} catch (err) {
@@ -333,20 +334,32 @@
 			////-------------------------
 		});
 		
+		
+		//var ue = UE.getEditor('content');
 		$('#isbnQuery').click(function() {
 			var isbn = $('#goods_sn').val();
 			$.ajax({
 				type: "post",
-				url: "{:leuu('Shelvesadmin/juheISBN')}",
+				url: "{:leuu('Shelvesadmin/amazonISBN')}",
 				data:{isbn:isbn},
 				dataType: "json",
-				success: function(str) {
-					$('#name').val(str.title);
-					$('#author').val(str.author);
-					$('#press').val(str.publisher);
-					$('#pre_price').val(str.price);
-					$('#network-file-input').val(str.images_medium);
-					$('#summary').html(str.summary);
+				beforeSend: function() {
+					$('#isbnQuery').val('. . .');
+					$('#isbnQuery').attr('disabled',true);
+				},
+				success: function(data) {
+					$('#isbnQuery').val('Go');
+					$('#isbnQuery').attr('disabled',false);
+					if (data.status) {
+						$('#name').val(data.title);
+						$('#author').val(data.author);
+						$('#press').val(data.press);
+						//$('#pre_price').val(data.price);
+						$('#uploadImage').attr('href','javascript:upload_one_image("图片上传","#thumb","",false,"'+ data.imgUrl +'");');
+						editorcontent.setContent(data.contents);
+					}else {
+						alert(data.info);
+					}
 				}
 			});
 		});

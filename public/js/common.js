@@ -562,12 +562,14 @@ function open_map_dialog(url, title, options, callback) {
  * @param multi 是否可以多选
  * @param filetype 文件类型，image,video,audio,file
  * @param app  应用名，对于 CMF 的应用名
+ * 
+ * @param imgUrl 网络图片地址 
  */
-function open_upload_dialog(dialog_title,callback,extra_params,multi,filetype,app){
+function open_upload_dialog(dialog_title,callback,extra_params,multi,filetype,app,imgUrl){
 	multi = multi?1:0;
 	filetype = filetype?filetype:'image';
 	app = app?app:GV.APP;
-    var params = '&multi='+multi+'&filetype='+filetype+'&app='+app ;
+    var params = '&multi='+multi+'&filetype='+filetype+'&app='+app+'&imgUrl='+imgUrl ;
     Wind.use("artDialog","iframeTools",function(){
         art.dialog.open(GV.ROOT+'index.php?g=asset&m=asset&a=plupload'  + params, {
 	        title: dialog_title,
@@ -601,12 +603,12 @@ function upload_one(dialog_title,input_selector,filetype,extra_params,app){
 	},extra_params,0,filetype,app);
 }
 
-function upload_one_image(dialog_title,input_selector,extra_params,app){
+function upload_one_image(dialog_title,input_selector,extra_params,app,imgUrl){
 	open_upload_dialog(dialog_title,function(dialog,files){
 		$(input_selector).val(files[0].filepath);
 		$(input_selector+'-preview').attr('src',files[0].preview_url);
 		$(input_selector+'-name').val(files[0].name);
-	},extra_params,0,'image',app);
+	},extra_params,0,'image',app,imgUrl);
 }
 
 /**

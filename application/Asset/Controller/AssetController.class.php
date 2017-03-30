@@ -104,6 +104,9 @@ class AssetController extends AdminbaseController {
             
             $multi=I('get.multi',0,'intval');
             $app=I('get.app/s','');
+            
+            $imgUrl=I('get.imgUrl','');
+            $imgUrl = $imgUrl != 'undefined' ? $imgUrl : '';
             $upload_max_filesize=$upload_setting[$filetype]['upload_max_filesize'];
             $this->assign('extensions',$upload_setting[$filetype]['extensions']);
             $this->assign('upload_max_filesize',$upload_max_filesize);
@@ -111,6 +114,7 @@ class AssetController extends AdminbaseController {
             $this->assign('mime_type',json_encode($mime_type));
             $this->assign('multi',$multi);
             $this->assign('app',$app);
+            $this->assign('imgUrl',$imgUrl);
             $this->display(':plupload');
         }
     }

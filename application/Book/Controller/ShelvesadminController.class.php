@@ -472,6 +472,17 @@ class ShelvesadminController extends AdminbaseController{
 		}
 	}
 	
+	public function amazonISBN() {
+		$isbn = I('post.isbn');
+		if(!empty($isbn)) {
+			$data = R('Util/PhpSpider/crawlAmazon', array($isbn));
+			$data['status'] = 1;
+			$this->ajaxReturn($data);
+		}else {
+			$this->error('请求失败');
+		}
+	}
+	
 	public function juheISBN() {
 		$isbn = I('post.isbn');
 		if(!empty($isbn)) {
