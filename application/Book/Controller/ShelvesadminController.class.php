@@ -45,7 +45,7 @@ class ShelvesadminController extends AdminbaseController{
 				}
 			}
 
-			$_POST['book']['cover'] = sp_asset_relative_url($_POST['book']['cover']);
+			$_POST['book']['cover'] = sp_asset_fetch_url($_POST['book']['cover']);
 			$_POST['book']['create_time']=time();
 // 			$_POST['book']['book_author']=get_current_admin_id();
 			$article=I("post.book");
@@ -253,7 +253,7 @@ class ShelvesadminController extends AdminbaseController{
 	public function delete(){
 		if(isset($_GET['id'])){
 			$id = I("get.id",0,'intval');
-			if ($this->goods_model->where(array('goods_id'=>$id))->save(array('status'=>3)) !==false) {
+			if ($this->goods_model->where(array('goods_id'=>$id))->save(array('inventory'=>0,'status'=>3)) !==false) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");
