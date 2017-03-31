@@ -6,6 +6,7 @@ class ShelvesadminController extends AdminbaseController{
 	
 	protected $goods_model;
 	protected $types_model;
+	protected $goods_detail_model;
 	protected $term_relationships_model;
 	protected $terms_model;
 	
@@ -15,6 +16,7 @@ class ShelvesadminController extends AdminbaseController{
 		$this->types_model = D("Book/GoodsType");
 		$this->terms_model = D("Book/Terms");
 		$this->term_relationships_model = D("Book/TermRelationships");
+		$this->goods_detail_model = D("Book/GoodsDetail");
 	}
 	
 	public function index(){
@@ -50,7 +52,7 @@ class ShelvesadminController extends AdminbaseController{
 // 			$_POST['book']['book_author']=get_current_admin_id();
 			$article=I("post.book");
 			$article['params']=json_encode($_POST['params'],JSON_UNESCAPED_UNICODE);      //不让存入的中文进行UNICODE转码
-			$article['detail']=htmlspecialchars_decode($article['detail']);
+// 			$article['detail']=htmlspecialchars_decode($article['detail']);
 			
 			//暂时只选择1个分类
 			foreach ($_POST['term'] as $mterm_id){
@@ -59,7 +61,12 @@ class ShelvesadminController extends AdminbaseController{
 			
 			$result=$this->goods_model->add($article);
 			if ($result) {
-				$this->success("添加成功！");
+				$details = array(
+					'goods_id' => $result,
+					'detail'   => htmlspecialchars_decode($article['detail'])
+				);
+				$rst = $this->goods_detail_model->add($details);
+				$rst ? $this->success("添加成功！") : $this->error('添加失败！');
 			} else {
 				$this->error("添加失败！");
 			}
@@ -75,6 +82,7 @@ class ShelvesadminController extends AdminbaseController{
 		$this->_getTermTree($type_id);
 		$terms=$this->types_model->select();
 		$book=$this->goods_model->where(array("goods_id"=>$id))->find();
+		$book['detail']=$this->goods_detail_model->where(array('goods_id'=>$id))->getField('detail');
 		$this->assign("book",$book);
 		$this->assign("params",json_decode($book['params'],true));
 		$this->assign("terms",$terms);
@@ -102,7 +110,7 @@ class ShelvesadminController extends AdminbaseController{
 			
 			$article=I("post.book");
 			$article['params']=json_encode($_POST['params'],JSON_UNESCAPED_UNICODE);
-			$article['detail']=htmlspecialchars_decode($article['detail']);
+// 			$article['detail']=htmlspecialchars_decode($article['detail']);
 			
 			foreach ($_POST['term'] as $mterm_id){
 				$article['type_id'] = $mterm_id;
@@ -110,7 +118,9 @@ class ShelvesadminController extends AdminbaseController{
 			
 			$result=$this->goods_model->save($article);
 			if ($result!==false) {
-				$this->success("保存成功！");
+				$details ['detail'] = htmlspecialchars_decode($article['detail']);
+				$rst = $this->goods_detail_model->where(array('goods_id'=>$goods_id))->save($details);
+				$rst !== false ? $this->success("保存成功！") : $this->error('保存失败！');
 			} else {
 				$this->error("保存失败！");
 			}

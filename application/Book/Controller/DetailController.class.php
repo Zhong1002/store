@@ -5,7 +5,7 @@ use Common\Controller\HomebaseController;
 class DetailController extends HomebaseController{
 	
 	public function index(){
-		$this->baseFun();
+		$this->baseFunc();
 		$this->display();
 	}
 	
@@ -27,21 +27,22 @@ class DetailController extends HomebaseController{
 		}
 		
 		$this->assign('comments',$comments);
-		$this->baseFun();
+		$this->baseFunc();
 		$this->display();
 	}
 	
-	private function baseFun() {
+	private function baseFunc() {
 		$user_id = sp_get_current_userid();
 		$goods_id=I('get.id',0,'intval');
 			
 		$goods = M('Goods');    //从数据库中选取数据
+		$goods_detail_model = M('GoodsDetail');
 		$favorite_model = M('MemberCollection');
 		$comments_model = M('GoodsComments');
 		
 		$where = array(
-				'member_id' => $user_id,
-				'goods_id' => $goods_id,
+			'member_id' => $user_id,
+			'goods_id' => $goods_id,
 		);
 		$favCount = $favorite_model->where($where)->count();
 		$commCount = $comments_model->where(array('goods_id'=>$goods_id))->count();
@@ -55,6 +56,7 @@ class DetailController extends HomebaseController{
 		$score = $totalScore != 0 ? ceil($totalScore / $commCount) : 5;
 		
 		$book = $goods->where(array('goods_id'=>$goods_id))->find();
+		$book['detail'] = $goods_detail_model->where(array('goods_id'=>$goods_id))->getField('detail');
 		
 		$this->assign('myFav',$favCount);
 		$this->assign('commCount',$commCount);

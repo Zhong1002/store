@@ -53,7 +53,8 @@ class IndexController extends HomebaseController{
 			foreach($keywords as $i=>$vo) {
 				$keywords[$i] = '%'.$vo.'%';
 			}
-			$where['CONCAT(name,params,detail)'] = array('like',$keywords,'AND');		//多字段模糊查询
+			$where['CONCAT(name,params)'] = array('like',$keywords,'AND');		//多字段模糊查询
+			$where['status'] = array('neq',3);
 				
 			$books = $this->goods_model->where($where)->page(1,10)->select();
 			if(empty($books)) {
@@ -79,7 +80,8 @@ class IndexController extends HomebaseController{
 			foreach($keywords as $i=>$vo) {
 				$keywords[$i] = '%'.$vo.'%';
 			}
-			$where['CONCAT(name,params,detail)'] = array('like',$keywords,'AND');		//多字段模糊查询
+			$where['CONCAT(name,params)'] = array('like',$keywords,'AND');		//多字段模糊查询
+			$where['status'] = array('neq',3);
 			
 			$books = $this->goods_model->where($where)->page($page_num,10)->select();
 			$res['result']=$books;

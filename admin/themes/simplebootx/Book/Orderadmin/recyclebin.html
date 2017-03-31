@@ -82,13 +82,7 @@
 			</td>
 			<td>{:date('Y-m-d H:i',$vo['create_time'])}</td>
 			<td>
-				<if condition="$vo['status'] eq 2">
-					<a href="{:leuu('Orderadmin/confirmOrder',array('id'=>$vo['order_id']))}">{:L('CONFIRM')}</a>
-				<elseif condition="$vo['status'] eq 3" /> 
-					<a href="{:leuu('Orderadmin/editOrder',array('id'=>$vo['order_id']))}">{:L('EDIT_DELIVERY')}</a>
-				<else/>
-					<a href="{:leuu('Orderadmin/clean',array('id'=>$vo['order_id']))}" class="js-ajax-delete"data-msg="你确定删除吗？删除后无法恢复！">{:L('DELETE')}</a>
-				</if>
+				<a href="{:leuu('Orderadmin/clean',array('id'=>$vo['order_id']))}" class="js-ajax-delete"data-msg="你确定删除吗？删除后无法恢复！">{:L('DELETE')}</a>
 			</td>
 		</tr>
 		</foreach>
