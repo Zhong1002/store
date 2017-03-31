@@ -3,6 +3,7 @@ return array(
 	"BOOK_SHELVESADMIN_INDEX" => '书籍管理',
     "BOOK_SHELVESADMIN_ADD" => '添加书籍',
 	"BOOK_SHELVESADMIN_EDIT"=> '编辑书籍',
+	"BOOK_SHELVESADMIN_RECYCLEBIN" => '回收书籍',
 	"TITLE"                 => '标题',
 	"AUTHOR"				=> '作者',
 	"NOW_PRICE"				=> '现价',

@@ -17,7 +17,7 @@ class OrderadminController extends AdminbaseController{
 	
 	public function index(){
 		$term_id=I('request.term',0,'intval');
-		$this->_lists();
+		$this->_lists(array('status'=>array('neq',19)));
 		$this->assign("taxonomys", $term_id);
 		$this->display();
 	}
@@ -147,6 +147,38 @@ class OrderadminController extends AdminbaseController{
 			redirect(leuu("Orderadmin/index"),1,"保存成功");
 		} else {
 			$this->error("保存失败！");
+		}
+	}
+	
+	function recyclebin(){
+		$term_id=I('request.term',0,'intval');
+		$this->_lists(array('status'=>array('eq',19)));
+		$this->assign("taxonomys", $term_id);
+		$this->display();
+	}
+	
+	function clean(){
+		if(isset($_POST['ids'])){
+			$ids = I('post.ids/a');
+			$ids = array_map('intval', $ids);
+			$status=$this->order_model->where(array('order_id'=>array('in',$ids),'status'=>19))->delete();
+				
+			if ($status!==false) {
+				$this->success("删除成功！");
+			} else {
+				$this->error("删除失败！");
+			}
+		}else{
+			if(isset($_GET['id'])){
+				$id = I("get.id",0,'intval');
+				$status=$this->order_model->where(array('order_id'=>$id,'status'=>19))->delete();
+	
+				if ($status!==false) {
+					$this->success("删除成功！");
+				} else {
+					$this->error("删除失败！");
+				}
+			}
 		}
 	}
 	

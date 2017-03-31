@@ -497,7 +497,7 @@ class ShoppingController extends HomebaseController{
 		$order_id = I("post.orderID");
 		
 		if(!empty($order_id)) {
-			$result1 = $this->order_model->where(array('order_id'=>$order_id))->delete();
+			$result1 = $this->order_model->where(array('order_id'=>$order_id))->setField('status',19);
 // 			$result2 = $this->orderDetail_model->where(array('order_id'=>$order_id))->delete();        //用外键删除
 			if($result1) {
 				$data['result'] = 1;

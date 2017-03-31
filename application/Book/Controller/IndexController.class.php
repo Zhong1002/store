@@ -22,8 +22,8 @@ class IndexController extends HomebaseController{
 // 			;
 // 		}
 
-		$books = $this->goods_model->where(array('type_id'=>array('in','2,3,4')))->select();
-		$types = $types_model->where(array('parent'=>'1','status'=>array('neq','3')))->select();      //parent=1代表的是推荐导航栏
+		$books = $this->goods_model->where(array('type_id'=>array('in','2,3,4'),'status'=>array('neq',3)))->select();
+		$types = $types_model->where(array('parent'=>1,'status'=>array('neq',3)))->select();      //parent=1代表的是推荐导航栏
 		
 		$slides = $slide_model->field('image,skip_type,aim_id,url')->where(array('slide_status'=>array('eq',1)))->select();
 		foreach($slides as $i=>$vo) {
@@ -88,18 +88,18 @@ class IndexController extends HomebaseController{
 		
 		//分类中的滚动
 		if(!empty($type_id)) {
-			$books = $this->goods_model->where(array('type_id'=>$type_id))->page($page_num,10)->select();
+			$books = $this->goods_model->where(array('type_id'=>$type_id,'status'=>array('neq','3')))->page($page_num,10)->select();
 			$res['result']=$books;
 			$this->ajaxReturn($res, 'json');
 		}
 	}
 	
-	public function test() {
+	/*public function test() {
 		$url = 'https://images-cn.ssl-images-amazon.com/images/I/517C0wj5PBL._AA218_.jpg';
 		$qiniu = new \Think\Upload\Driver\Qiniu(sp_get_cmf_settings('storage')['Qiniu']);	// 实例化七牛上传驱动类
 		$qiniuKey = $qiniu->qiniu->fetchThird($url);
 	
 		dump($qiniuKey);
-	}
+	}*/
 	
 }

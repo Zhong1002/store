@@ -18,7 +18,7 @@ class CategoryController extends HomebaseController{
 		$goods_model = M('Goods');
 		$types_model = M('GoodsType');
 		
-		$books = $goods_model->where(array('type_id'=>$type_id))->page(1,10)->select();
+		$books = $goods_model->where(array('type_id'=>$type_id,'status'=>array('neq','3')))->page(1,10)->select();
 		$types = $types_model->field('name,type_id')->where(array('type_id'=>$type_id))->find();    
 		
 		$this->assign('books',$books);

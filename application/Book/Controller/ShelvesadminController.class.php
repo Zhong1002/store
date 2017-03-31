@@ -438,8 +438,8 @@ class ShelvesadminController extends AdminbaseController{
 		if(isset($_POST['ids'])){
 			$ids = I('post.ids/a');
 			$ids = array_map('intval', $ids);
-			$status=$this->goods_model->where(array("id"=>array('in',$ids),'status'=>3))->delete();
-			$this->term_relationships_model->where(array('object_id'=>array('in',$ids)))->delete();
+			$status=$this->goods_model->where(array('goods_id'=>array('in',$ids),'status'=>3))->delete();
+// 			$this->term_relationships_model->where(array('object_id'=>array('in',$ids)))->delete();
 			
 			if ($status!==false) {
 				$this->success("删除成功！");
@@ -449,8 +449,8 @@ class ShelvesadminController extends AdminbaseController{
 		}else{
 			if(isset($_GET['id'])){
 				$id = I("get.id",0,'intval');
-				$status=$this->goods_model->where(array("id"=>$id,'status'=>3))->delete();
-				$this->term_relationships_model->where(array('object_id'=>$id))->delete();
+				$status=$this->goods_model->where(array('goods_id'=>$id,'status'=>3))->delete();
+// 				$this->term_relationships_model->where(array('object_id'=>$id))->delete();
 				
 				if ($status!==false) {
 					$this->success("删除成功！");
@@ -464,7 +464,7 @@ class ShelvesadminController extends AdminbaseController{
 	function restore(){
 		if(isset($_GET['id'])){
 			$id = I("get.id",0,'intval');
-			if ($this->goods_model->where(array("id"=>$id,'status'=>3))->save(array("status"=>"1"))) {
+			if ($this->goods_model->where(array('goods_id'=>$id,'status'=>3))->save(array('status'=>1))) {
 				$this->success("还原成功！");
 			} else {
 				$this->error("还原失败！");

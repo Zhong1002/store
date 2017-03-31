@@ -103,9 +103,9 @@ class MemberController extends HomebaseController{
 		$user_id = sp_get_current_userid();
 		
 		if(!empty($status)) {
-			$this->allOrder = $this->order_model->where(array('member_id'=>$user_id,'status'=>$status))->order(array('create_time'=>'desc'))->select();
+			$this->allOrder = $this->order_model->where(array('member_id'=>$user_id,'status'=>$status))->order(array('order_id'=>'desc'))->select();
 		}else {
-			$this->allOrder = $this->order_model->where(array('member_id'=>$user_id))->page($page_num,8)->order(array('create_time'=>'desc'))->select();
+			$this->allOrder = $this->order_model->where(array('member_id'=>$user_id,'status'=>array('neq',19)))->page($page_num,8)->order(array('order_id'=>'desc'))->select();
 		}
 		foreach ($this->allOrder as $k=>$vo) {
 			$this->allOrder[$k]['statusTip2'] = "";
