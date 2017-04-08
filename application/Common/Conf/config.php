@@ -95,6 +95,10 @@ $configs= array(
         'HTML_CACHE_TIME'       =>    60,   // 全局静态缓存有效期（秒）
         'HTML_FILE_SUFFIX'      =>    '.html', // 设置静态缓存文件后缀
         
+		/* redis */
+		'REDIS_HOST'			=> '127.0.0.1',
+		'REDIS_PORT'			=> 6379,
+        
         'TMPL_PARSE_STRING'=>array(
         	'__UPLOAD__' => __ROOT__.'/data/upload/',
         	'__STATICS__' => __ROOT__.'/statics/',

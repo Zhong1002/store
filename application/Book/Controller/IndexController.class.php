@@ -96,12 +96,32 @@ class IndexController extends HomebaseController{
 		}
 	}
 	
-	/*public function test() {
-		$url = 'https://images-cn.ssl-images-amazon.com/images/I/517C0wj5PBL._AA218_.jpg';
-		$qiniu = new \Think\Upload\Driver\Qiniu(sp_get_cmf_settings('storage')['Qiniu']);	// 实例化七牛上传驱动类
-		$qiniuKey = $qiniu->qiniu->fetchThird($url);
+	public function test1() {
+// 		$url = 'https://images-cn.ssl-images-amazon.com/images/I/517C0wj5PBL._AA218_.jpg';
+// 		$qiniu = new \Think\Upload\Driver\Qiniu(sp_get_cmf_settings('storage')['Qiniu']);	// 实例化七牛上传驱动类
+// 		$qiniuKey = $qiniu->qiniu->fetchThird($url);
+// 		dump($qiniuKey);
+
+// 		echo phpinfo();
+
+		//redis
+		$options = array(
+			'type'  	=>'Redis',
+			'prefix'	=>'redis_',
+			'expire'	=>300,
+			'timeout'	=>300,
+			'persistent'=>false,
+		);
+		$books = $this->goods_model->where(array('type_id'=>array('in','2,3,4')))->select();
+		S('books',$books,$options);
+// 		S('test',null,$options);
+		$rst = S('books','',$options);
+		dump($rst);
+		
+	}
 	
-		dump($qiniuKey);
-	}*/
+	public function test2() {
+		echo phpinfo();
+	}
 	
 }

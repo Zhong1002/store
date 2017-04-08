@@ -35,7 +35,7 @@ class ShoppingController extends HomebaseController{
 			$books = $Model
 			->field('member_id,goods_id,num,status,name,pre_price,now_price,inventory,cover')
 			->where(array('member_id'=>$user_id))
-			->order(array('status'=>'DESC','id'=>'DESC'))
+			->order(array('id'=>'DESC','status'=>'DESC'))
 			->select();
 			
 			$length = count($books,COUNT_NORMAL);
