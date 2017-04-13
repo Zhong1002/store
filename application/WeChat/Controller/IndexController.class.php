@@ -104,7 +104,7 @@ class IndexController extends HomebaseController{
                         break;
 
                     default:
-                        $wechat->replyText("欢迎访问叮当书舍公众平台！您的事件类型：{$data['Event']}");
+                        $wechat->replyText("欢迎访问叮当书舍公众平台！");
                         break;
                 }
                 break;
@@ -271,6 +271,11 @@ class IndexController extends HomebaseController{
     				),
     			),
     		),
+    		array(
+    			'type' => 'view',
+    			'name' => '合作',
+    			'url'  => 'http://www.ddbookstore.com/index.php?g=&m=Introduction&a=index',
+    		),
     	);
     	$menuRst = $wechatAuth->menuCreate($button);
     	dump($menuRst);
@@ -291,7 +296,7 @@ class IndexController extends HomebaseController{
     		session("token", $token['access_token']);
     	}
     	
-    	$result = $wechatAuth->qrcodeCreate(123,2592000);
+    	$result = $wechatAuth->qrcodeCreate(123,0);
     	$qrcodeURL = $wechatAuth->showqrcode($result['ticket']);
     	redirect($qrcodeURL);
     }

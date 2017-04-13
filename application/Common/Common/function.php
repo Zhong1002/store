@@ -1055,6 +1055,7 @@ function sp_file_read($file){
 		file_get_contents($file);
 	}
 }
+
 /*修复缩略图使用网络地址时，会出现的错误。5iymt 2015年7月10日*/
 function sp_asset_relative_url($asset_url){
     if(strpos($asset_url,"http")===0){
