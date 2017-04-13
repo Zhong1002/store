@@ -14,29 +14,29 @@
         #contentDiv { position:absolute; top:0; left:0; bottom:0; right:0; height:auto; min-height:0;/* overflow-x:auto; overflow-y:scroll; *height:expression(document.documentElement.clientHeight); *width:expression(document.documentElement.clientWidth);*/}
         /*.col1 {color:#333;}*/
 
-        .anniu,.anniu:visited{ display:block;width:242px; height:50px; /*padding-top: 226px;*/background:url(http://jz.faisys.com/image/pro6/btn.png) -19px -3px no-repeat;margin: 0px auto 0px auto;}
-        .anniu:hover {display:block;width:242px; height:50px; background:url(http://jz.faisys.com/image/pro6/btn.png) -19px -55px no-repeat; }
+        .anniu,.anniu:visited{ display:block;width:242px; height:50px; /*padding-top: 226px;*/background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -19px -3px no-repeat;margin: 0px auto 0px auto;}
+        .anniu:hover {display:block;width:242px; height:50px; background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -19px -55px no-repeat; }
 
         .btn { display:block; width:160px; height:46px; line-height:46px; text-align:center; font-size:22px; color:#fff; background:#3baa24; text-decoration:none;}
         .btn:hover { background:#45b72a;}
 
-        #btn1{display:block; width:220px; height:42px;background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -113px no-repeat;margin-left:0px!important;}
-        #btn1:hover{display:block; width:220px; height:42px;background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -155px no-repeat;}
+        #btn1{display:block; width:220px; height:42px;background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -113px no-repeat;margin-left:0px!important;}
+        #btn1:hover{display:block; width:220px; height:42px;background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -155px no-repeat;}
 
         #btn2{display:block; width:192px; height:44px;background:url(http://jz.faisys.com/image/pro8/button.png) 0px -196px no-repeat;margin-left:0px!important;  top:314px;position:absolute;}
         #btn2:hover{background:url(http://jz.faisys.com/image/pro8/button.png) 0px -240px no-repeat;}
 
-        #btn3{display:block; width:220px; height:42px; background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -213px no-repeat; margin: 0 auto;}
-        #btn3:hover{display:block; width:220px; height:42px;background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -255px no-repeat;}
+        #btn3{display:block; width:220px; height:42px; background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -213px no-repeat; margin: 0 auto;}
+        #btn3:hover{display:block; width:220px; height:42px;background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -255px no-repeat;}
 
-        #btn4{display:block; width:220px; height:42px;background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -311px no-repeat; margin: 0 auto;}
-        #btn4:hover{background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -353px no-repeat;}
+        #btn4{display:block; width:220px; height:42px;background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -311px no-repeat; margin: 0 auto;}
+        #btn4:hover{background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -353px no-repeat;}
 
-        #btn9{display:block; width:220px; height:42px;background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -113px no-repeat;margin: 0 auto;}
-        #btn9:hover{background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -155px no-repeat;}
+        #btn9{display:block; width:220px; height:42px;background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -113px no-repeat;margin: 0 auto;}
+        #btn9:hover{background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -155px no-repeat;}
 
-        #btn5{display:block; width:220px; height:42px;background:url(http://jz.faisys.com/image/pro6/btn.png) -29px -412px no-repeat;margin: 0 auto;}
-        #btn5:hover{background:url(http://jz.faisys.com/image/pro6/btn.png) -30px -455px no-repeat;}
+        #btn5{display:block; width:220px; height:42px;background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -29px -412px no-repeat;margin: 0 auto;}
+        #btn5:hover{background:url({:sp_get_asset_upload_path('image/btn.jpg')}) -30px -455px no-repeat;}
         
         #imgWithTitle{float: right; margin-right:50px; text-align:center;}
         #qrcode{width: 200px; height: 200px; }
@@ -170,6 +170,7 @@
             </div>
             <div style="clear;both;"></div>
             <div style="width: 220px;height: 42px; margin:0px auto; padding-top:44px;">
+                
                 <!--<a hidefocus="true" id="btn1" href="http://jz.faisco.com/reg.html" style="margin-left:90px;"></a>-->
             </div>
         </div>
@@ -184,7 +185,7 @@
         <!--更多栏4 -->
         <div id="index5" class="lan1" style="width: 100%;height:730px;background:url({:sp_get_asset_upload_path('image/introIndex_13.jpg')}) #cee9f4 center  no-repeat;">
             <div style="width:956px;padding-top:640px;height:50px;margin:0 auto;">
-                <!--<a hidefocus="true" id="btn4" href="http://jz.faisco.com/reg.html"></a>-->
+                <a hidefocus="true" id="btn4" href="{:leuu('Book/Index/index')}"></a>
             </div>
         </div>
 
