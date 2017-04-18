@@ -22,7 +22,7 @@ class IndexController extends HomebaseController{
 // 			;
 // 		}
 
-		$books = $this->goods_model->where(array('type_id'=>array('in','2,3,4'),'status'=>array('neq',3)))->select();
+		$books = $this->goods_model->field('goods_id,type_id,name,pre_price,now_price,cover')->where(array('type_id'=>array('in','2,3,4'),'status'=>array('neq',3)))->select();
 		$types = $types_model->where(array('parent'=>1,'status'=>array('neq',3)))->select();      //parent=1代表的是推荐导航栏
 		
 		$slides = $slide_model->field('image,skip_type,aim_id,url')->where(array('slide_status'=>array('eq',1)))->select();
