@@ -175,7 +175,7 @@ class ShelvesadminController extends AdminbaseController{
 				foreach($keywords as $i=>$vo) {
 					$keywords[$i] = '%'.$vo.'%';
 				}
-				$where['CONCAT(name,params,detail)'] = array('like',$keywords,'AND');		//多字段模糊查询
+				$where['CONCAT(name,params)'] = array('like',$keywords,'AND');		//多字段模糊查询
 				/*$where = array(									
 					'name' => array('like',$keywords),
 					'params' => array('like',$keywords),

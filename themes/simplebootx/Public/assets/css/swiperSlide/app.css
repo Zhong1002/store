@@ -126,6 +126,7 @@ nav.menu-bar a.fr{float: right;font-size: 0.8rem;}
 .mui-input-group .mui-input-group:before{background: none;}
 .mui-input-group.noafter:after{background: none;}
 
+/*中信无法访问的页面的格式*/
 .user-avatar {
     display:inline-block;
     margin:5px auto;
@@ -171,6 +172,19 @@ nav.menu-bar a.fr{float: right;font-size: 0.8rem;}
     background-color: #000;  
     opacity: 0.6; 
 }
+
+.oper_header{
+    line-height: 50px;
+    font-size: 18px;
+    text-align: center;
+    margin: 0 auto;
+    color: #5D6570;
+    font-family: "SimSun", "宋体";
+}
+
+.order_bottom {border-bottom: 2px solid #db0000;}
+
+
 /*会员*/
 .login{margin-top: 20px;}
 .login label{color: #999999;margin-bottom: 10px;display: block;}

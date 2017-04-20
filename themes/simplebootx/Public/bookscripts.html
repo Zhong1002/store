@@ -79,6 +79,7 @@
     $('nav a').each(function () {
         if(this.href == document.location.href || document.location.href.search(this.href) >= 0) {
             $(this).addClass('mui-active');
+            if($(this).parent().hasClass('order-nav')) $(this).addClass('order_bottom');
         }
     });
     

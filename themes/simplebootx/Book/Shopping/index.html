@@ -14,7 +14,7 @@
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper bgw">
         <div class="mui-scroll">
             <header class="mui-text-center">
-                <h2>购物车</h2>
+                <p class="oper_header">购物车</p>
             </header>
             <ul id="cartTable" class="mui-table-view book-view">
                 <li class="mui-table-view-cell">
@@ -149,7 +149,7 @@
         var li = this.parentNode.parentNode;
         var myLocation = $(this);
         var goods_id = $(this).parent().children('.goods_id').val();
-        mui.confirm('确认删除？', '叮当书店', function(e) {
+        mui.confirm('确认删除？', '叮当书舍', function(e) {
             if (e.index == 0) {
                 setTimeout(function() {
                     mui.swipeoutClose(li);        //mui内置方法
