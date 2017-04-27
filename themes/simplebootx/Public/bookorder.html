@@ -3,12 +3,12 @@
     nav.menu-bar a{width: 20%; float: left;}
 </style>
 </head>
-<body class="bgw">
-<header class="mui-text-center">
+<body>
+<header class="mui-text-center bgw">
 	<p class="oper_header">我的订单</p>
 </header>
-<div class="mui-content bgw">
-<header class="mui-text-center">
+<div class="mui-content">
+<header class="mui-text-center bgw">
 	<nav class="menu-bar order-nav">
 		<a href="{:leuu('Member/order')}">全部订单</a>
 		<a href="{:leuu('Member/waitpayment')}">待付款</a>
@@ -17,7 +17,7 @@
 		<a href="{:leuu('Member/waitcomment')}">待评价</a>
 	</nav>
 </header>
-<div class="lists">
+<div class="lists mt20">
 <foreach name='allOrder' item='all' key='k'>
 <ul class="mui-table-view">
 <a href="{:leuu('Shopping/orderDetail',array('orderID'=>$all['order_id']))}">

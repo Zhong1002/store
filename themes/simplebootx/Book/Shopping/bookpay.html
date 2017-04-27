@@ -5,11 +5,11 @@
 #cartTable {margin-bottom:54px;}
 </style>
 </head>
-<body class="bgw">
-<header class="mui-text-center">
+<body>
+<header class="mui-text-center bgw">
 	<p class="oper_header">确认订单</p>
 </header>
-<div class="mui-content bgw">
+<div class="mui-content mt20">
     <form action="{:leuu('Shopping/submitOrder')}" method="post" onsubmit="return form_confirm">
         <ul class="mui-table-view book-view">
             <if condition="$defaultAddr['addr_id'] neq null">
