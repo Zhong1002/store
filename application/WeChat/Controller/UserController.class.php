@@ -16,7 +16,7 @@ class UserController extends HomebaseController{
 	
 	 public function index(){
 	 	 $usersThird = M('MemberThird');
- 	  	 $userURL = 'http://www.ddbookstore.com/index.php?g=&m=Member&a=index';
+ 	  	 $userURL = 'http://book.jasonfj.com/index.php?g=&m=Member&a=index';
 		 $this->config = C('WECHAT_CONFIG');
  	  	 
          /* 加载微信高级接口SDK */

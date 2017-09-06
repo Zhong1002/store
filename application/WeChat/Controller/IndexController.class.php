@@ -234,7 +234,7 @@ class IndexController extends HomebaseController{
     }
     
     public function createMenu() {
-    	$redirect_uri = 'http://www.ddbookstore.com/index.php?g=WeChat&m=User&a=index';
+    	$redirect_uri = 'http://book.jasonfj.com/index.php?g=WeChat&m=User&a=index';
     	
     	/* 加载微信高级接口SDK */
     	$token = session("token");
@@ -254,7 +254,7 @@ class IndexController extends HomebaseController{
     		array(
     			'type' => 'view',
     			'name' => '在线书店',
-    			'url'  => 'http://www.ddbookstore.com/index.php?g=&m=Index&a=index',
+    			'url'  => 'http://book.jasonfj.com/index.php?g=&m=Index&a=index',
     		),
     		array(
     			'name' => '会员中心',
@@ -267,14 +267,14 @@ class IndexController extends HomebaseController{
     				array(
     					'type' => 'view',
     					'name' => '个人中心',
-    					'url'  => 'http://www.ddbookstore.com/index.php?g=&m=Member&a=index',
+    					'url'  => 'http://book.jasonfj.com/index.php?g=&m=Member&a=index',
     				),
     			),
     		),
     		array(
     			'type' => 'view',
     			'name' => '合作',
-    			'url'  => 'http://www.ddbookstore.com/index.php?g=&m=Introduction&a=index',
+    			'url'  => 'http://book.jasonfj.com/index.php?g=&m=Introduction&a=index',
     		),
     	);
     	$menuRst = $wechatAuth->menuCreate($button);
